@@ -1,0 +1,38 @@
+import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/map';
+import { User } from '../model/user';
+
+/*
+  Generated class for the Gobal provider.
+
+  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
+  for more info on providers and Angular 2 DI.
+*/
+@Injectable()
+export class Global {
+  private static _appURL = 'http://task.hisign.top:6001/v1';
+  private static _token = '';
+  private static _currentUser: User = null;
+
+  constructor(public http: Http) {
+    console.log('Hello Gobal Provider');
+  }
+  public get AppURL(): string {
+    return Global._appURL;
+  }
+  public get LocalToken(): string {
+    return Global._token;
+  }
+  public set LocalToken(token: string) {
+    Global._token = token;
+  }
+  public get CurrentUser(): User {
+    return Global._currentUser;
+  }
+  public set CurrentUser(currentUser: User) {
+    Global._currentUser = currentUser;
+  }
+
+
+}

@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
+import { Global } from '../../providers/global';
+import { UserService } from '../../providers/user.service';
+import { sha1 } from '../../module/sha1';
 
 /*
   Generated class for the Signin page.
@@ -14,11 +17,25 @@ import { TabsPage } from '../tabs/tabs';
 })
 export class SigninPage {
 
-  constructor(public navCtrl: NavController) { }
+  constructor(public navCtrl: NavController,
+    private userService: UserService,
+    private global: Global) { }
+
+  username: string;
+  password: string;
 
   ionViewDidLoad() {
   }
   siginin() {
-    this.navCtrl.push(TabsPage);
+    let hash = sha1.hash(this.password);
+    this.userService.signin(this.username, hash)
+      .subscribe(user => {
+        if (user != null) {
+          this.global.LocalToken = user.token;
+          this.navCtrl.push(TabsPage);
+        } else {
+          this.global.LocalToken = '';
+        }
+      })
   }
 }

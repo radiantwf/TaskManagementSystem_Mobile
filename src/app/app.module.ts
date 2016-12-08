@@ -11,6 +11,8 @@ import { TaskDetailPage } from '../pages/task-detail/task-detail';
 import { ProjectDetailPage } from '../pages/project-detail/project-detail';
 import { ProductDetailPage } from '../pages/product-detail/product-detail';
 import { CreateTaskPage } from '../pages/create-task/create-task';
+import { Global } from '../providers/global';
+import { UserService } from '../providers/user.service';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,11 @@ import { CreateTaskPage } from '../pages/create-task/create-task';
     SigninPage,
     CommunicationsPage,
   ],
-  providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }]
+  providers: [Global,
+    UserService,
+    {
+      provide: ErrorHandler,
+      useClass: IonicErrorHandler
+    }]
 })
 export class AppModule { }
