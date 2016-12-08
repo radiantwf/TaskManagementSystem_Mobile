@@ -1,0 +1,48 @@
+<!--
+  Generated template for the Signin page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button menuToggle icon-only>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title item-center>任务一览</ion-title>
+    <ion-buttons right>
+      <button ion-button icon-only (click)="addTask()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+  <ion-list>
+    <ion-item (click)="openModal({charNum: 0})">
+      <h2>
+        <ion-icon name="list" item-left></ion-icon>任务管理系统开发1</h2>
+      <div item-right>新建</div>
+    </ion-item>
+    <ion-item (click)="openModal({charNum: 0})">
+      <h2>
+        <ion-icon name="list" item-left></ion-icon>任务管理系统开发2</h2>
+      <div item-right>计划中</div>
+    </ion-item>
+    <ion-item (click)="openModal({charNum: 0})">
+      <h2>
+        <ion-icon name="list" item-left></ion-icon>任务管理系统开发3</h2>
+      <p>计划完成日期：2016年12月20日</p>
+      <div item-right>执行中</div>
+    </ion-item>
+    <ion-item (click)="openModal({charNum: 0})">
+      <h2>
+        <ion-icon name="list" item-left></ion-icon>任务管理系统开发4任务管理系统开发4任务管理系统开发4任务管理系统开发4</h2>
+      <p>实际完成日期：2016年12月10日</p>
+      <div item-right>已完成</div>
+    </ion-item>
+  </ion-list>
+</ion-content>

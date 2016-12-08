@@ -1,0 +1,82 @@
+<!--
+  Generated template for the CreateTask page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar hideBackButton="true">
+    <ion-buttons start>
+      <button ion-button (click)="cancel()">
+        <span color="primary">取消</span>
+      </button>
+    </ion-buttons>
+    <ion-title>新建任务</ion-title>
+    <ion-buttons right>
+      <button ion-button (click)="addTask()">
+        <span color="primary">添加</span>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label floating>任务名称</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>详细描述</ion-label>
+      <ion-textarea></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>客户联络方式</ion-label>
+      <ion-textarea></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label>销售负责人</ion-label>
+      <ion-select>
+        <ion-option>销售测试用户</ion-option>
+        <ion-option>无</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>要求完成日期</ion-label>
+      <ion-datetime displayFormat="YYYY年MM月DD日"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>OC负责人</ion-label>
+      <ion-select>
+        <ion-option>OC测试用户</ion-option>
+        <ion-option>无</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>择执行负责人</ion-label>
+      <ion-select>
+        <ion-option>产品测试用户</ion-option>
+        <ion-option>无</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>其他相关负责人员</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>任务计划开始日期</ion-label>
+      <ion-datetime displayFormat="YYYY年MM月DD日"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>任务计划完成日期</ion-label>
+      <ion-datetime displayFormat="YYYY年MM月DD日"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>所属产品</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>所属项目</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+  </ion-list>
+</ion-content>
