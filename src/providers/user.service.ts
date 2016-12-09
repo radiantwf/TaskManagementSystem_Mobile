@@ -20,13 +20,26 @@ export class UserService {
     console.log('Hello UserService Provider');
   }
 
-  signin(uid: string, password: string): Observable<User> {
+  signin(uid: string, password: string): Observable<boolean> {
     return this.http
       .post(this.signInUrl, JSON.stringify({ 'uid': uid, 'password': password })
       , { headers: this.httpHeaders() })
-      .map(response => response.json().data as User);
+      .map(response => response.json().data as User)
+      .map(user => {
+        if (user != null) {
+          this.global.LocalToken = user.token
+          return true;
+        } else {
+          this.global.LocalToken = null;
+          return false;
+        }
+      });
   }
 
+  signOut() {
+    this.global.LocalToken = null;
+  }
+  
   private httpHeaders(): Headers {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let token = this.global.LocalToken;

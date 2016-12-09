@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
 import { Global } from '../../providers/global';
 import { UserService } from '../../providers/user.service';
@@ -18,24 +18,34 @@ import { sha1 } from '../../module/sha1';
 export class SigninPage {
 
   constructor(public navCtrl: NavController,
+    private alertCtrl: AlertController,
     private userService: UserService,
     private global: Global) { }
 
-  username: string;
-  password: string;
+  username: string = 'testoc';
+  password: string = 'test';
 
   ionViewDidLoad() {
   }
+
   siginin() {
     let hash = sha1.hash(this.password);
     this.userService.signin(this.username, hash)
-      .subscribe(user => {
-        if (user != null) {
-          this.global.LocalToken = user.token;
+      .subscribe(ret => {
+        if (ret) {
           this.navCtrl.push(TabsPage);
         } else {
-          this.global.LocalToken = '';
+          this.showSigninErrorAlert();
         }
-      })
+      });
+  }
+
+  showSigninErrorAlert() {
+    let alert = this.alertCtrl.create({
+      title: '登录失败',
+      subTitle: '用户名密码输入有误，请重新输入。',
+      buttons: ['确定']
+    });
+    alert.present();
   }
 }
