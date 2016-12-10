@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController, MenuController } from 'ionic-angular';
+import { NavController, MenuController } from 'ionic-angular';
 import { TaskDetailPage } from '../task-detail/task-detail';
 import { CreateTaskPage } from '../create-task/create-task';
 
@@ -16,14 +16,12 @@ import { CreateTaskPage } from '../create-task/create-task';
 export class TaskPage {
 
   constructor(public navCtrl: NavController,
-    public modalCtrl: ModalController,
     public menu: MenuController) {
     menu.enable(true);
   }
 
-  openModal(characterNum) {
-    let modal = this.modalCtrl.create(TaskDetailPage, characterNum);
-    modal.present();
+  showDetail(characterNum) {
+    this.navCtrl.push(TaskDetailPage);
   }
   getItems(event) {
 

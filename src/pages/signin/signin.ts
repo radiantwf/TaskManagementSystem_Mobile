@@ -33,7 +33,7 @@ export class SigninPage {
     this.userService.signin(this.username, hash)
       .subscribe(ret => {
         if (ret) {
-          this.navCtrl.push(TabsPage);
+          this.navCtrl.setRoot(TabsPage);
         } else {
           this.showSigninErrorAlert();
         }

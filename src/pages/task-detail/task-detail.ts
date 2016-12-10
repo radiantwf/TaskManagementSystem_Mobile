@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, Platform, NavParams, ViewController } from 'ionic-angular';
+import { NavController, Platform, NavParams, ViewController, PopoverController } from 'ionic-angular';
 import { CommunicationsPage } from '../communications/communications';
+import { TaskDetailPopoverPage } from '../task-detail-popover/task-detail-popover';
 
 /*
   Generated class for the TaskDetail page.
@@ -17,11 +18,16 @@ export class TaskDetailPage {
   constructor(public navCtrl: NavController,
     public platform: Platform,
     public params: NavParams,
-    public viewCtrl: ViewController) { }
+    public viewCtrl: ViewController,
+    private popoverCtrl: PopoverController) { }
 
+  presentPopover(ev) {
+    let popover = this.popoverCtrl.create(TaskDetailPopoverPage, {
+    });
 
-  dismiss() {
-    this.viewCtrl.dismiss();
+    popover.present({
+      ev: ev
+    });
   }
   communicate() {
     this.navCtrl.push(CommunicationsPage);

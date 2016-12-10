@@ -8,6 +8,7 @@ import { TaskPage } from '../pages/task/task';
 import { ProjectPage } from '../pages/project/project';
 import { ProductPage } from '../pages/product/product';
 import { TaskDetailPage } from '../pages/task-detail/task-detail';
+import { TaskDetailPopoverPage } from '../pages/task-detail-popover/task-detail-popover';
 import { ProjectDetailPage } from '../pages/project-detail/project-detail';
 import { ProductDetailPage } from '../pages/product-detail/product-detail';
 import { CreateTaskPage } from '../pages/create-task/create-task';
@@ -27,6 +28,7 @@ import { UserService } from '../providers/user.service';
     TabsPage,
     SigninPage,
     CommunicationsPage,
+    TaskDetailPopoverPage,
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -44,6 +46,7 @@ import { UserService } from '../providers/user.service';
     TabsPage,
     SigninPage,
     CommunicationsPage,
+    TaskDetailPopoverPage,
   ],
   providers: [Global,
     UserService,

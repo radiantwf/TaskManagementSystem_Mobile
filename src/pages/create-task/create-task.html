@@ -7,14 +7,20 @@
 <ion-header>
   <ion-navbar hideBackButton="true">
     <ion-buttons start>
-      <button ion-button (click)="cancel()">
+      <button ion-button showWhen="ios" (click)="cancel()">
         <span color="primary">取消</span>
+      </button>
+      <button ion-button icon-only showWhen="android,windows" (click)="cancel()">
+        <ion-icon name="close"></ion-icon>
       </button>
     </ion-buttons>
     <ion-title>新建任务</ion-title>
     <ion-buttons end>
-      <button ion-button (click)="addTask()">
+      <button ion-button showWhen="ios" (click)="addTask()">
         <span color="primary">添加</span>
+      </button>
+      <button ion-button icon-only showWhen="android,windows" (click)="addTask()">
+        <ion-icon name="checkmark"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>

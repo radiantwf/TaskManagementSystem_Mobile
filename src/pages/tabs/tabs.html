@@ -1,4 +1,41 @@
-<ion-tabs>
+<ion-menu [content]="mycontent">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>
+        <ion-card>你好，用户</ion-card>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <button ion-item (click)="openPage(tab1Root)">
+        <ion-icon name="list" item-left></ion-icon>
+        任务一览
+      </button>
+      <button ion-item (click)="openPage(tab2Root)">
+        <ion-icon name="shirt" item-left></ion-icon>
+        产品一览
+      </button>
+      <button ion-item (click)="openPage(tab3Root)">
+        <ion-icon name="link" item-left></ion-icon>
+        项目一览
+      </button>
+      <button ion-item (click)="openPage(tab4Root)">
+        <ion-icon name="people" item-left></ion-icon>
+        @我（待处理）
+      </button>
+      <button ion-item detail-none (click)="signout()">
+        <ion-icon name="exit" item-left></ion-icon>
+        登出
+      </button>
+      <button ion-item detail-none (click)="exit()">
+        <ion-icon name="power" item-left></ion-icon>
+        关闭
+      </button>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+<ion-tabs #mycontent>
   <ion-tab [root]="tab1Root" tabTitle="任务" tabIcon="list"></ion-tab>
   <ion-tab [root]="tab2Root" tabTitle="产品" tabIcon="shirt"></ion-tab>
   <ion-tab [root]="tab3Root" tabTitle="项目" tabIcon="link"></ion-tab>

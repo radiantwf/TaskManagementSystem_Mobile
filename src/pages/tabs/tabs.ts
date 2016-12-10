@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Platform, MenuController, NavController } from 'ionic-angular';
 
 import { TaskPage } from '../task/task';
 import { ProductPage } from '../product/product';
@@ -15,7 +16,18 @@ export class TabsPage {
   tab3Root: any = ProjectPage;
   tab4Root: any = TaskPage;
 
-  constructor() {
+  constructor(public platform: Platform,
+    public menu: MenuController,
+    public navCtrl: NavController) {
 
+  }
+  exit() {
+    this.platform.exitApp();
+  }
+  signout() {
+  }
+  openPage(page) {
+    // navigate to the new page if it is not the current page
+    this.navCtrl.setRoot(page);
   }
 }
