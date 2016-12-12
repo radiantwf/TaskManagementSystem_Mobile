@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 
 /*
   Generated class for the Communications page.
@@ -12,8 +12,15 @@ import { NavController } from 'ionic-angular';
   templateUrl: 'communications.html'
 })
 export class CommunicationsPage {
+  taskId: string;
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams) {
+    this.taskId = navParams.get('taskId').taskId;
+  }
 
-  constructor(public navCtrl: NavController) {}
+  back() {
+    this.navCtrl.pop();
+  }
 
   ionViewDidLoad() {
     console.log('Hello CommunicationsPage Page');

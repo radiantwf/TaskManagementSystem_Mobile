@@ -14,6 +14,10 @@ import { ProductDetailPage } from '../pages/product-detail/product-detail';
 import { CreateTaskPage } from '../pages/create-task/create-task';
 import { Global } from '../providers/global';
 import { UserService } from '../providers/user.service';
+import { EmployeeService } from '../providers/employee.service';
+import { TaskService } from '../providers/task.service';
+import { ProjectService } from '../providers/project.service';
+import { ProductService } from '../providers/product.service';
 
 @NgModule({
   declarations: [
@@ -48,8 +52,13 @@ import { UserService } from '../providers/user.service';
     CommunicationsPage,
     TaskDetailPopoverPage,
   ],
-  providers: [Global,
+  providers: [
+    Global,
     UserService,
+    EmployeeService,
+    TaskService,
+    ProjectService,
+    ProductService,
     {
       provide: ErrorHandler,
       useClass: IonicErrorHandler

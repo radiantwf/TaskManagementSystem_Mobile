@@ -9,29 +9,41 @@
   <ion-content>
     <ion-list>
       <button ion-item (click)="openPage(0)">
-        <ion-icon name="list" item-left></ion-icon>
+        <ion-icon name="list-outline" showWhen="ios" item-left></ion-icon>
+        <ion-icon name="list" showWhen="android,windows" item-left></ion-icon>
         任务一览
       </button>
       <button ion-item (click)="openPage(1)">
-        <ion-icon name="shirt" item-left></ion-icon>
+        <ion-icon name="shirt-outline" showWhen="ios" item-left></ion-icon>
+        <ion-icon name="shirt" showWhen="android,windows" item-left></ion-icon>
         产品一览
       </button>
       <button ion-item (click)="openPage(2)">
-        <ion-icon name="link" item-left></ion-icon>
+        <ion-icon name="link-outline" showWhen="ios" item-left></ion-icon>
+        <ion-icon name="link" showWhen="android,windows" item-left></ion-icon>
         项目一览
       </button>
       <button ion-item (click)="openPage(3)">
-        <ion-icon name="people" item-left></ion-icon>
-        @我（待处理）
+        <ion-icon name="at-outline" showWhen="ios" item-left></ion-icon>
+        <ion-icon name="at" showWhen="android,windows" item-left></ion-icon>
+        待处理
       </button>
       <button ion-item detail-none (click)="signout()">
-        <ion-icon name="exit" item-left></ion-icon>
+        <ion-icon name="exit-outline" showWhen="ios" item-left></ion-icon>
+        <ion-icon name="exit" showWhen="android,windows" item-left></ion-icon>
         登出
       </button>
       <button ion-item detail-none (click)="exit()">
-        <ion-icon name="power" item-left></ion-icon>
+        <ion-icon name="power-outline" showWhen="ios" item-left></ion-icon>
+        <ion-icon name="power" showWhen="android,windows" item-left></ion-icon>
         关闭
       </button>
+      <ion-item>
+        <ion-icon name="person-outline" showWhen="ios" item-left></ion-icon>
+        <ion-icon name="person" showWhen="android,windows" item-left></ion-icon>
+        <ion-label> 只看与我有关的内容</ion-label>
+        <ion-toggle item-right checked="true"></ion-toggle>
+      </ion-item>
     </ion-list>
   </ion-content>
 </ion-menu>
@@ -39,5 +51,5 @@
   <ion-tab [root]="tab1Root" tabTitle="任务" tabIcon="list"></ion-tab>
   <ion-tab [root]="tab2Root" tabTitle="产品" tabIcon="shirt"></ion-tab>
   <ion-tab [root]="tab3Root" tabTitle="项目" tabIcon="link"></ion-tab>
-  <ion-tab [root]="tab4Root" tabTitle="@我" tabIcon="people"></ion-tab>
+  <ion-tab [root]="tab4Root" tabTitle="待处理" tabIcon="at"></ion-tab>
 </ion-tabs>

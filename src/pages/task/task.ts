@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, MenuController } from 'ionic-angular';
+import { NavController, MenuController, App } from 'ionic-angular';
 import { TaskDetailPage } from '../task-detail/task-detail';
 import { CreateTaskPage } from '../create-task/create-task';
+import { Task } from '../../model/task';
+import { TaskService } from '../../providers/task.service';
 
 /*
   Generated class for the Task page.
@@ -14,23 +16,25 @@ import { CreateTaskPage } from '../create-task/create-task';
   templateUrl: 'task.html'
 })
 export class TaskPage {
-
+  tasks: Task[] = [];
   constructor(public navCtrl: NavController,
-    public menu: MenuController) {
+    public appCtrl: App,
+    public menu: MenuController,
+    public taskService: TaskService) {
     menu.enable(true);
   }
 
-  showDetail(characterNum) {
-    this.navCtrl.push(TaskDetailPage);
+  showDetail(taskId) {
+    this.appCtrl.getRootNav().push(TaskDetailPage, { taskId: taskId });
   }
   getItems(event) {
 
   }
   addTask() {
-    this.navCtrl.push(CreateTaskPage);
+    this.appCtrl.getRootNav().push(CreateTaskPage);
   }
   ionViewDidLoad() {
-    console.log('Hello TaskPage Page');
+    this.taskService.getTasks(null, null, 1)
+      .subscribe(tasks => this.tasks = tasks);
   }
-
 }

@@ -14,6 +14,7 @@ export class Global {
   private static _appURL = 'http://task.hisign.top:6001/v1';
   private static _token = '';
   private static _currentUser: User = null;
+  private static _pageSize: Number = 10;
 
   constructor(public http: Http) {
     console.log('Hello Gobal Provider');
@@ -29,6 +30,9 @@ export class Global {
   }
   public get CurrentUser(): User {
     return Global._currentUser;
+  }
+  public get PageSize(): Number {
+    return Global._pageSize;
   }
   public set CurrentUser(currentUser: User) {
     Global._currentUser = currentUser;

@@ -23,5 +23,4 @@ export class CreateTaskPage {
   ionViewDidLoad() {
     console.log('Hello CreateTaskPage Page');
   }
-
 }

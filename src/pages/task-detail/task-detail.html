@@ -25,114 +25,118 @@
         <ion-icon name="chatbubbles"></ion-icon>
       </button>
   </ion-fab>
+  <ion-item>
+    任务编号
+    <ion-note item-right>
+      {{task?.id}}
+    </ion-note>
+  </ion-item>
   <ion-item text-wrap>
     任务名称
-    <br />
     <ion-note>
-      实验室管理系统与（海华）DNA——lims接口不通
+      <br>{{task?.name}}
     </ion-note>
   </ion-item>
   <ion-item text-wrap>
     详细描述
-    <br />
     <ion-note>
-      济宁综合实验室系统与海华DNA-lims系统对接过程中，鉴定文书无法回传的问题，海华内部运维和研发沟通已达成一致，处理的方案如下： 如果遇到海鑫综合实验室与海华DNA_LIMS接口的问题，海华方面由项目负责人找开发经理，安排开发人员做系统联调工作。前提是海鑫综合实验室方面也要指定对应的研发人员，然后由双方研发人员约定时间共同来完成系统的联调工作。
+      <br>{{task?.description}}
     </ion-note>
   </ion-item>
   <ion-item>
     创建人
     <ion-note item-right>
-      芮元春
+      {{task?.creator}}
     </ion-note>
   </ion-item>
   <ion-item>
     创建时间
     <ion-note item-right>
-      2016年12月03日 22:13:00
+      {{task?.createdTime | date:"yyyy年MM月dd日 HH:mm:ss"}}
     </ion-note>
   </ion-item>
   <ion-item>
     销售负责人
     <ion-note item-right>
-      赵洪恩
+      {{task?.primarySeller}}
     </ion-note>
   </ion-item>
-  <ion-item>
+  <ion-item *ngIf="task?.requiringEndDate!=null">
     要求截止日期
     <ion-note item-right>
-      2016年12月09日
+      {{task?.requiringEndDate | date:"yyyy年MM月dd日"}}
     </ion-note>
   </ion-item>
-  <ion-item>
+  <ion-item *ngIf="task?.customerContact!=null">
     客户联系方式
     <ion-note item-right>
-      无
+      {{task?.customerContact}}
     </ion-note>
   </ion-item>
-  <ion-item>
+  <ion-item *ngIf="task?.parentProduct!=null">
     所属产品
     <ion-note item-right>
-      无
+      {{task?.parentProduct}}
     </ion-note>
   </ion-item>
-  <ion-item>
+  <ion-item *ngIf="task?.parentProject!=null">
     所属项目
     <ion-note item-right>
-      无
+      {{task?.parentProject}}
     </ion-note>
   </ion-item>
   <ion-item>
     OC负责人
     <ion-note item-right>
-      芮元春
+      {{task?.primaryOC}}
     </ion-note>
   </ion-item>
   <ion-item>
     执行负责人
     <ion-note item-right>
-      段然
+      {{task?.primaryExecutor}}
     </ion-note>
   </ion-item>
-  <ion-item>
+  <ion-item *ngIf="task?.otherExecutors!=null">
     其它相关人员
     <ion-note item-right>
-      金凤
+      {{task?.otherExecutors}}
     </ion-note>
   </ion-item>
-  <ion-item>
+  <ion-item *ngIf="task?.planningBeginDate!=null">
     计划开始时间
     <ion-note item-right>
-      2016年12月03日
+      {{task?.planningBeginDate | date:"yyyy年MM月dd日"}}
     </ion-note>
   </ion-item>
-  <ion-item>
+  <ion-item *ngIf="task?.planningEndDate!=null">
     计划结束时间
     <ion-note item-right>
-      2016年12月20日
+      {{task?.planningEndDate | date:"yyyy年MM月dd日"}}
     </ion-note>
   </ion-item>
-  <ion-item>
+  <ion-item *ngIf="task?.realBeginDate!=null">
     实际开始时间
     <ion-note item-right>
-      2016年12月03日
+      {{task?.realBeginDate | date:"yyyy年MM月dd日"}}
     </ion-note>
   </ion-item>
-  <ion-item>
+  <ion-item *ngIf="task?.realEndDate!=null">
     实际结束时间
     <ion-note item-right>
-      2016年12月20日
+      {{task?.realEndDate | date:"yyyy年MM月dd日"}}
     </ion-note>
   </ion-item>
   <ion-item>
     任务状态
     <ion-note item-right>
-      已完成
+      {{task?.status}}
     </ion-note>
   </ion-item>
-  <ion-item>
-    实际结束时间
+  <ion-item *ngIf="task?.percent!=null">
+    任务进度
     <ion-note item-right>
-      100%
+      {{task?.percent}}%
     </ion-note>
   </ion-item>
 </ion-content>
