@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Platform, MenuController, NavController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { Platform, MenuController, App, Tabs } from 'ionic-angular';
 
 import { TaskPage } from '../task/task';
 import { ProductPage } from '../product/product';
@@ -9,6 +9,7 @@ import { ProjectPage } from '../project/project';
   templateUrl: 'tabs.html'
 })
 export class TabsPage {
+  @ViewChild('myTabs') tabRef: Tabs;
   // this tells the tabs component which Pages
   // should be each tab's root Page
   tab1Root: any = TaskPage;
@@ -17,17 +18,18 @@ export class TabsPage {
   tab4Root: any = TaskPage;
 
   constructor(public platform: Platform,
-    public menu: MenuController,
-    public navCtrl: NavController) {
-
+    public appCtrl: App,
+    public menu: MenuController) {
   }
   exit() {
     this.platform.exitApp();
   }
   signout() {
   }
-  openPage(page) {
+  openPage(index) {
     // navigate to the new page if it is not the current page
-    this.navCtrl.setRoot(page);
+    this.menu.close();
+    this.tabRef.select(index);
+    // this.tabs.getActiveChildNav().setRoot(page);
   }
 }

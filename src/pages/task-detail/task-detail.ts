@@ -32,6 +32,9 @@ export class TaskDetailPage {
   communicate() {
     this.navCtrl.push(CommunicationsPage);
   }
+  back() {
+    this.navCtrl.pop();
+  }
   ionViewDidLoad() {
     console.log('Hello TaskDetailPage Page');
   }

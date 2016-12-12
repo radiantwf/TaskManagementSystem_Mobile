@@ -8,19 +8,19 @@
   </ion-header>
   <ion-content>
     <ion-list>
-      <button ion-item (click)="openPage(tab1Root)">
+      <button ion-item (click)="openPage(0)">
         <ion-icon name="list" item-left></ion-icon>
         任务一览
       </button>
-      <button ion-item (click)="openPage(tab2Root)">
+      <button ion-item (click)="openPage(1)">
         <ion-icon name="shirt" item-left></ion-icon>
         产品一览
       </button>
-      <button ion-item (click)="openPage(tab3Root)">
+      <button ion-item (click)="openPage(2)">
         <ion-icon name="link" item-left></ion-icon>
         项目一览
       </button>
-      <button ion-item (click)="openPage(tab4Root)">
+      <button ion-item (click)="openPage(3)">
         <ion-icon name="people" item-left></ion-icon>
         @我（待处理）
       </button>
@@ -35,7 +35,7 @@
     </ion-list>
   </ion-content>
 </ion-menu>
-<ion-tabs #mycontent>
+<ion-tabs #mycontent #myTabs>
   <ion-tab [root]="tab1Root" tabTitle="任务" tabIcon="list"></ion-tab>
   <ion-tab [root]="tab2Root" tabTitle="产品" tabIcon="shirt"></ion-tab>
   <ion-tab [root]="tab3Root" tabTitle="项目" tabIcon="link"></ion-tab>
