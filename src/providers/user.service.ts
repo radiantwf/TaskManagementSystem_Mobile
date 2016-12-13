@@ -14,7 +14,7 @@ import { Global } from './global';
 @Injectable()
 export class UserService {
   private signInUrl = `${this.global.AppURL}/user/signin`;  // URL to web api
-  private userUrl = `${this.global.AppURL}/user`;  // URL to web api
+  // private userUrl = `${this.global.AppURL}/user`;  // URL to web api
 
   constructor(public http: Http, private global: Global) {
     console.log('Hello UserService Provider');

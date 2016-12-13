@@ -1,6 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, MenuController, App, Tabs, AlertController, NavController } from 'ionic-angular';
+import { Platform, MenuController, App, Tabs, NavController } from 'ionic-angular';
+import { Global } from '../../providers/global';
 
+import { SigninPage } from '../signin/signin';
 import { TaskPage } from '../task/task';
 import { ProductPage } from '../product/product';
 import { ProjectPage } from '../project/project';
@@ -20,36 +22,20 @@ export class TabsPage {
   constructor(public platform: Platform,
     public appCtrl: App,
     public menu: MenuController,
-    public alertCtrl: AlertController,
+    public global: Global,
     public navCtrl: NavController) {
   }
   exit() {
-    this.menu.close();
-    let confirm = this.alertCtrl.create({
-      title: '退出确认',
-      message: '确定要退出本应用?',
-      buttons: [
-        {
-          text: '取消',
-          handler: () => {
-          }
-        },
-        {
-          text: '退出',
-          handler: () => {
-            this.platform.exitApp();
-          }
-        }
-      ]
-    });
-    confirm.present();
+    this.platform.exitApp();
   }
   signout() {
+    this.global.LocalToken = null;
+    this.global.CurrentUser = null;
+    this.appCtrl.getRootNav().setRoot(SigninPage);
   }
   openPage(index) {
     // navigate to the new page if it is not the current page
     this.menu.close();
     this.tabRef.select(index);
-    // this.tabs.getActiveChildNav().setRoot(page);
   }
 }

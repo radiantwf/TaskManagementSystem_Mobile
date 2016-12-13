@@ -24,7 +24,6 @@ export class CommunicationsPage {
     public communicationsService: CommunicationsService,
     public global: Global) {
     this.taskId = navParams.get('taskId');
-    console.log(this.taskId);
     this.empId = global.CurrentUser.empId;
   }
 
