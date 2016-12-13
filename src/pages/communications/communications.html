@@ -16,70 +16,22 @@
 </ion-header>
 <ion-content padding>
   <div class="dynamic">
-    <div class="other">
-      <ul>
-        <li class="title">王峰</li>
-        <li>
-          <div class="message">saffsdfsfsafsfsfsf
-          </div>
-        </li>
-        <li>
-          <div class="time">2016-11-20&nbsp;12:23:12
-          </div>
-        </li>
-      </ul>
-    </div>
-    <div class="other">
-      <ul>
-        <li class="title">王峰</li>
-        <li>
-          <div class="message">saffsdfsfsafsfsfsf
-          </div>
-        </li>
-        <li>
-          <div class="time">2016-11-20&nbsp;12:23:12
-          </div>
-        </li>
-      </ul>
-    </div>
-    <div class="other">
-      <ul>
-        <li class="title">王峰</li>
-        <li>
-          <div class="message">saffsdfsfsafsfsfsf
-          </div>
-        </li>
-        <li>
-          <div class="time">2016-11-20&nbsp;12:23:12
-          </div>
-        </li>
-      </ul>
-    </div>
-    <div class="me">
-      <ul>
-        <li class="title"></li>
-        <li>
-          <div class="message">saffsdfsfsafsfsfsf
-          </div>
-        </li>
-        <li>
-          <div class="time">2016-11-20&nbsp;12:23:12
-          </div>
-        </li>
-      </ul>
-    </div>
-    <div class="me">
-      <ul>
-        <li class="title"></li>
-        <li>
-          <div class="message">safasfafafasfdasdfasfasfdsfsadfasfdsdfsdfsdfasdfasdfasfdasfasfasfsfasf
-          </div>
-        </li>
-        <li>
-          <div class="time">2016-11-20&nbsp;12:23:12
-          </div>
-        </li>
-      </ul>
-    </div>
+    <template ngFor let-record [ngForOf]="list">
+      <div [ngClass]="{'other': record?.personId !== empId, 'me': record?.personId === empId}">
+        <ul>
+          <li class="title">
+            <div *ngIf="record.personId !== empId">{{record?.personName}}</div>
+          </li>
+          <li>
+            <div class="message">{{record?.content}}
+            </div>
+          </li>
+          <li>
+            <div class="time">{{record?.sentTime | date:"yyyy-MM-dd HH:mm:ss"}}
+            </div>
+          </li>
+        </ul>
+      </div>
+    </template>
   </div>
 </ion-content>

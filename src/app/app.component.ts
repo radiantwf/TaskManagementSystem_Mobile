@@ -9,6 +9,7 @@ import { SigninPage } from '../pages/signin/signin';
 export class MyApp {
   rootPage = SigninPage;
   @ViewChild('rootNav') nav: NavController;
+  confirmAlert: any;
 
   constructor(public platform: Platform,
     public app: App,
@@ -32,23 +33,28 @@ export class MyApp {
     });
   }
   confirmExitApp() {
-    let confirm = this.alertCtrl.create({
+    if (this.confirmAlert != null) {
+      return;
+    }
+    this.confirmAlert = this.alertCtrl.create({
       title: '退出确认',
       message: '确定要退出本应用?',
       buttons: [
         {
           text: '取消',
           handler: () => {
+            this.confirmAlert = null;
           }
         },
         {
           text: '退出',
           handler: () => {
             this.platform.exitApp();
+            this.confirmAlert = null;
           }
         }
       ]
     });
-    confirm.present();
+    this.confirmAlert.present();
   }
 }

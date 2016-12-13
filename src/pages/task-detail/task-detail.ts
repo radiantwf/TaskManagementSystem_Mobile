@@ -47,7 +47,6 @@ export class TaskDetailPage {
     this.taskService.getTask(this.taskId)
       .subscribe(task => {
         this.task = task;
-        console.log(this.task);
       });
   }
 

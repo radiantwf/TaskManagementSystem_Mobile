@@ -18,6 +18,7 @@ import { EmployeeService } from '../providers/employee.service';
 import { TaskService } from '../providers/task.service';
 import { ProjectService } from '../providers/project.service';
 import { ProductService } from '../providers/product.service';
+import { CommunicationsService } from '../providers/communications.service';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { ProductService } from '../providers/product.service';
     TaskService,
     ProjectService,
     ProductService,
+    CommunicationsService,
     {
       provide: ErrorHandler,
       useClass: IonicErrorHandler

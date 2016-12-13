@@ -27,10 +27,12 @@ export class UserService {
       .map(response => response.json().data as User)
       .map(user => {
         if (user != null) {
-          this.global.LocalToken = user.token
+          this.global.LocalToken = user.token;
+          this.global.CurrentUser = user;
           return true;
         } else {
           this.global.LocalToken = null;
+          this.global.CurrentUser = null;
           return false;
         }
       });
@@ -39,7 +41,7 @@ export class UserService {
   signOut() {
     this.global.LocalToken = null;
   }
-  
+
   private httpHeaders(): Headers {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let token = this.global.LocalToken;

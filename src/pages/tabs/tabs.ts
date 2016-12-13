@@ -43,7 +43,6 @@ export class TabsPage {
       ]
     });
     confirm.present();
-
   }
   signout() {
   }

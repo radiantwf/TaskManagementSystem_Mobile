@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { Global } from '../../providers/global';
 
+import { Communication } from '../../model/communication';
+import { CommunicationsService } from '../../providers/communications.service';
 /*
   Generated class for the Communications page.
 
@@ -13,9 +16,16 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class CommunicationsPage {
   taskId: string;
+  list: Communication[];
+  empId: string;
+
   constructor(public navCtrl: NavController,
-    public navParams: NavParams) {
-    this.taskId = navParams.get('taskId').taskId;
+    public navParams: NavParams,
+    public communicationsService: CommunicationsService,
+    public global: Global) {
+    this.taskId = navParams.get('taskId');
+    console.log(this.taskId);
+    this.empId = global.CurrentUser.empId;
   }
 
   back() {
@@ -23,7 +33,10 @@ export class CommunicationsPage {
   }
 
   ionViewDidLoad() {
-    console.log('Hello CommunicationsPage Page');
+    this.communicationsService.getCommunicationsById(this.taskId)
+      .subscribe(communications => {
+        this.list = communications;
+      });
   }
 
 }

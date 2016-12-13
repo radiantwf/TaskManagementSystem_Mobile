@@ -24,8 +24,8 @@ export class TaskPage {
     menu.enable(true);
   }
 
-  showDetail(taskId) {
-    this.appCtrl.getRootNav().push(TaskDetailPage, { taskId: taskId });
+  showDetail(id) {
+    this.appCtrl.getRootNav().push(TaskDetailPage, { taskId: id });
   }
   getItems(event) {
 
