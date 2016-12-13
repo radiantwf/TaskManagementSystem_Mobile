@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, MenuController, App, Tabs } from 'ionic-angular';
+import { Platform, MenuController, App, Tabs, AlertController, NavController } from 'ionic-angular';
 
 import { TaskPage } from '../task/task';
 import { ProductPage } from '../product/product';
@@ -19,10 +19,31 @@ export class TabsPage {
 
   constructor(public platform: Platform,
     public appCtrl: App,
-    public menu: MenuController) {
+    public menu: MenuController,
+    public alertCtrl: AlertController,
+    public navCtrl: NavController) {
   }
   exit() {
-    this.platform.exitApp();
+    this.menu.close();
+    let confirm = this.alertCtrl.create({
+      title: '退出确认',
+      message: '确定要退出本应用?',
+      buttons: [
+        {
+          text: '取消',
+          handler: () => {
+          }
+        },
+        {
+          text: '退出',
+          handler: () => {
+            this.platform.exitApp();
+          }
+        }
+      ]
+    });
+    confirm.present();
+
   }
   signout() {
   }

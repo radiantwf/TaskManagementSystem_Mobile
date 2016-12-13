@@ -33,8 +33,7 @@
         <ion-icon name="exit" showWhen="android,windows" item-left></ion-icon>
         登出
       </button>
-      <button ion-item detail-none (click)="exit()">
-        <ion-icon name="power-outline" showWhen="ios" item-left></ion-icon>
+      <button ion-item detail-none showWhen="android,windows" (click)="exit()">
         <ion-icon name="power" showWhen="android,windows" item-left></ion-icon>
         关闭
       </button>
