@@ -19,8 +19,8 @@
     <template ngFor let-record [ngForOf]="list">
       <div [ngClass]="{'other': record?.personId !== empId, 'me': record?.personId === empId}">
         <ul>
-          <li class="title">
-            <div *ngIf="record.personId !== empId">{{record?.personName}}</div>
+          <li *ngIf="record.personId !== empId" class="title">
+            {{record?.personName}}
           </li>
           <li>
             <div class="message">{{record?.content}}
@@ -34,16 +34,19 @@
       </div>
     </template>
   </div>
-  <ion-footer>
-    <ion-toolbar>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <form (ngSubmit)="addCommunication()" #communicationForm="ngForm">
       <ion-row>
         <ion-col width-80>
-          <textarea class="texteare-inherit" rows="3" placeholder="请输入..."></textarea>
+          <textarea class="texteare-inherit" rows="3" [(ngModel)]="content" placeholder="请输入..." #messageTextArea="ngModel" [required]="true"
+            name="messageTextArea"></textarea>
         </ion-col>
         <ion-col width-20>
-          <button class="center" ion-button>发&nbsp;送</button>
+          <button class="center" ion-button type="submit" [disabled]="!communicationForm.form.valid">发&nbsp;送</button>
         </ion-col>
       </ion-row>
-    </ion-toolbar>
-  </ion-footer>
-</ion-content>
+    </form>
+  </ion-toolbar>
+</ion-footer>

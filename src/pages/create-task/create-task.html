@@ -41,9 +41,8 @@
     </ion-item>
     <ion-item>
       <ion-label>销售负责人</ion-label>
-      <ion-select>
-        <ion-option>销售测试用户</ion-option>
-        <ion-option>无</ion-option>
+      <ion-select cancelText="取消" okText="确定">
+        <ion-option *ngFor="let emp of sellers" [value]="emp.empId">{{emp.name}}</ion-option>
       </ion-select>
     </ion-item>
     <ion-item>
@@ -52,16 +51,14 @@
     </ion-item>
     <ion-item>
       <ion-label>OC负责人</ion-label>
-      <ion-select>
-        <ion-option>OC测试用户</ion-option>
-        <ion-option>无</ion-option>
+      <ion-select cancelText="取消" okText="确定">
+        <ion-option *ngFor="let emp of OC" [value]="emp.empId">{{emp.name}}</ion-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label>择执行负责人</ion-label>
-      <ion-select>
-        <ion-option>产品测试用户</ion-option>
-        <ion-option>无</ion-option>
+      <ion-select cancelText="取消" okText="确定">
+        <ion-option *ngFor="let emp of taskManagers" [value]="emp.empId">{{emp.name}}</ion-option>
       </ion-select>
     </ion-item>
     <ion-item>

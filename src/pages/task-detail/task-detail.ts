@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, Platform, NavParams, ViewController,  ActionSheetController } from 'ionic-angular';
+import { NavController, Platform, NavParams, ViewController, ActionSheetController } from 'ionic-angular';
 import { CommunicationsPage } from '../communications/communications';
 import { Task } from '../../model/task';
 import { TaskService } from '../../providers/task.service';
@@ -29,7 +29,7 @@ export class TaskDetailPage {
   }
 
   communicate() {
-    this.navCtrl.push(CommunicationsPage, { taskId: this.taskId });
+    this.navCtrl.push(CommunicationsPage, { id: this.taskId });
   }
   back() {
     this.navCtrl.pop();

@@ -1,6 +1,13 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
+import { Task } from './../../model/task';
+import { Employee } from './../../model/employee';
+import { TaskService } from './../../providers/task.service';
+import { EmployeeService } from './../../providers/employee.service';
+
+import { Global } from '../../providers/global';
+
 /*
   Generated class for the CreateTask page.
 
@@ -12,15 +19,67 @@ import { NavController } from 'ionic-angular';
   templateUrl: 'create-task.html'
 })
 export class CreateTaskPage {
+  employees: Array<Employee>;
+  sellers: Array<Employee>;
+  OC: Array<Employee>;
+  taskManagers: Array<Employee>;
 
-  constructor(public navCtrl: NavController) {}
-  cancel(){
-     this.navCtrl.pop();
+  sellerId: string;
+  OCId: string;
+  taskManagerId: string;
+
+  constructor(public navCtrl: NavController,
+    public taskService: TaskService,
+    public employeeService: EmployeeService,
+    public global: Global) {
+
   }
-  addTask(){
-     this.navCtrl.pop();
+
+  cancel() {
+    this.navCtrl.pop();
+  }
+  addTask() {
+    this.navCtrl.pop();
   }
   ionViewDidLoad() {
-    console.log('Hello CreateTaskPage Page');
+    this.loadEmployees();
+  }
+  
+  loadEmployees() {
+    this.employeeService.getEmployee().subscribe(e => {
+      this.employees = e;
+      this.ProcessEmployees();
+    });
+
+  }
+
+  ProcessEmployees() {
+    this.sellers = new Array<Employee>();
+    this.OC = new Array<Employee>();
+    this.taskManagers = new Array<Employee>();
+    this.sellerId = null;
+    this.OCId = null;
+    this.taskManagerId = null;
+    this.employees.forEach(value => {
+      if (value.permissions.findIndex(p => (p === 98)) >= 0) {
+        this.sellers.push(value);
+        if (value.empId === this.global.CurrentUser.empId) {
+          this.sellerId = value.empId;
+        }
+      }
+      if (value.permissions.findIndex(p => (p === 99)) >= 0) {
+        this.OC.push(value);
+        if (value.empId === this.global.CurrentUser.empId) {
+          this.OCId = value.empId;
+        }
+      }
+      if (value.permissions.findIndex(p => (p === 1
+        || p === 11 || p === 18 || p === 19 || p === 21 || p === 29)) >= 0) {
+        this.taskManagers.push(value);
+        if (value.empId === this.global.CurrentUser.empId) {
+          this.taskManagerId = value.empId;
+        }
+      }
+    });
   }
 }

@@ -15,15 +15,16 @@ import { CommunicationsService } from '../../providers/communications.service';
   templateUrl: 'communications.html'
 })
 export class CommunicationsPage {
-  taskId: string;
+  id: string;
   list: Communication[];
   empId: string;
+  content: string;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public communicationsService: CommunicationsService,
     public global: Global) {
-    this.taskId = navParams.get('taskId');
+    this.id = navParams.get('id');
     this.empId = global.CurrentUser.empId;
   }
 
@@ -32,10 +33,20 @@ export class CommunicationsPage {
   }
 
   ionViewDidLoad() {
-    this.communicationsService.getCommunicationsById(this.taskId)
+    this.communicationsService.getCommunicationsById(this.id)
       .subscribe(communications => {
         this.list = communications;
       });
   }
 
+  addCommunication() {
+    if (!this.content) { return; }
+    let communication = new Communication(this.id, this.global.CurrentUser.empId, null, new Date(Date.now()), this.content);
+
+    this.communicationsService.create(communication).subscribe(() => {
+      this.communicationsService.getCommunicationsById(this.id)
+        .subscribe(communications => this.list = communications);
+      this.content = '';
+    });
+  }
 }
