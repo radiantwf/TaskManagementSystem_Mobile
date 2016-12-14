@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, Platform, NavParams, ViewController, PopoverController } from 'ionic-angular';
+import { NavController, Platform, NavParams, ViewController,  ActionSheetController } from 'ionic-angular';
 import { CommunicationsPage } from '../communications/communications';
-import { TaskDetailPopoverPage } from '../task-detail-popover/task-detail-popover';
 import { Task } from '../../model/task';
 import { TaskService } from '../../providers/task.service';
 
@@ -23,20 +22,12 @@ export class TaskDetailPage {
     public platform: Platform,
     public params: NavParams,
     public viewCtrl: ViewController,
-    private popoverCtrl: PopoverController,
+    private actionSheetCtrl: ActionSheetController,
     private navParams: NavParams,
     private taskService: TaskService) {
     this.taskId = navParams.get('taskId').taskId;
   }
 
-  presentPopover(ev) {
-    let popover = this.popoverCtrl.create(TaskDetailPopoverPage, {
-    });
-
-    popover.present({
-      ev: ev
-    });
-  }
   communicate() {
     this.navCtrl.push(CommunicationsPage, { taskId: this.taskId });
   }
@@ -49,5 +40,52 @@ export class TaskDetailPage {
         this.task = task;
       });
   }
-
+  presentActionSheet() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: '任务操作',
+      buttons: [
+        {
+          text: '开始',
+          handler: () => {
+          }
+        },
+        {
+          text: '填写进度',
+          handler: () => {
+          }
+        },
+        {
+          text: '开始',
+          handler: () => {
+          }
+        },
+        {
+          text: '完成',
+          handler: () => {
+          }
+        },
+        {
+          text: '关闭',
+          handler: () => {
+          }
+        },
+        {
+          text: '编辑',
+          handler: () => {
+          }
+        }, {
+          text: '删除',
+          role: 'destructive',
+          handler: () => {
+          }
+        }, {
+          text: '取消',
+          role: 'cancel',
+          handler: () => {
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
 }

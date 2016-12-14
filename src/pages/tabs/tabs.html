@@ -26,7 +26,7 @@
       <button ion-item (click)="openPage(3)">
         <ion-icon name="at-outline" showWhen="ios" item-left></ion-icon>
         <ion-icon name="at" showWhen="android,windows" item-left></ion-icon>
-        待处理
+        @我
       </button>
       <button ion-item detail-none (click)="signout()">
         <ion-icon name="exit-outline" showWhen="ios" item-left></ion-icon>
@@ -50,5 +50,5 @@
   <ion-tab [root]="tab1Root" tabTitle="任务" tabIcon="list"></ion-tab>
   <ion-tab [root]="tab2Root" tabTitle="产品" tabIcon="shirt"></ion-tab>
   <ion-tab [root]="tab3Root" tabTitle="项目" tabIcon="link"></ion-tab>
-  <ion-tab [root]="tab4Root" tabTitle="待处理" tabIcon="at"></ion-tab>
+  <ion-tab [root]="tab4Root" tabTitle="@我" tabIcon="at"></ion-tab>
 </ion-tabs>

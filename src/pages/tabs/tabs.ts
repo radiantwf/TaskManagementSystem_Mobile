@@ -6,6 +6,7 @@ import { SigninPage } from '../signin/signin';
 import { TaskPage } from '../task/task';
 import { ProductPage } from '../product/product';
 import { ProjectPage } from '../project/project';
+import { AtMePage } from '../at-me/at-me';
 
 @Component({
   templateUrl: 'tabs.html'
@@ -17,7 +18,7 @@ export class TabsPage {
   tab1Root: any = TaskPage;
   tab2Root: any = ProductPage;
   tab3Root: any = ProjectPage;
-  tab4Root: any = TaskPage;
+  tab4Root: any = AtMePage;
 
   constructor(public platform: Platform,
     public appCtrl: App,

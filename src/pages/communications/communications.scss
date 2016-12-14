@@ -151,4 +151,19 @@ page-communications {
     font-weight: 600;
     padding-bottom: 5px;
   }
+  .texteare-inherit {
+    width: inherit;
+  }
+  textarea {
+    resize: none;
+    border: 0.55px solid #e6e6e6;
+  }
+  .button {
+    background-color: green;
+    opacity: 0.9;
+  }
+  .button.activated {
+    background-color: green;
+    opacity: 1;
+  }
 }
