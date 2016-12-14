@@ -16,10 +16,10 @@
     </ion-buttons>
     <ion-title>新建任务</ion-title>
     <ion-buttons end>
-      <button ion-button showWhen="ios" type="submit">
+      <button ion-button showWhen="ios" (click)="taskForm.onSubmit($event)" [disabled]="!taskForm.form.valid">
         <span color="primary">添加</span>
       </button>
-      <button ion-button icon-only showWhen="android,windows,core" type="submit">
+      <button ion-button icon-only showWhen="android,windows,core" (click)="taskForm.onSubmit($event)" [disabled]="!taskForm.form.valid">
         <ion-icon name="checkmark"></ion-icon>
       </button>
     </ion-buttons>
