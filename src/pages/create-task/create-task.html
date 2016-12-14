@@ -10,76 +10,85 @@
       <button ion-button showWhen="ios" (click)="cancel()">
         <span color="primary">取消</span>
       </button>
-      <button ion-button icon-only showWhen="android,windows" (click)="cancel()">
+      <button ion-button icon-only showWhen="android,windows,core" (click)="cancel()">
         <ion-icon name="close"></ion-icon>
       </button>
     </ion-buttons>
     <ion-title>新建任务</ion-title>
     <ion-buttons end>
-      <button ion-button showWhen="ios" (click)="addTask()">
+      <button ion-button showWhen="ios" type="submit">
         <span color="primary">添加</span>
       </button>
-      <button ion-button icon-only showWhen="android,windows" (click)="addTask()">
+      <button ion-button icon-only showWhen="android,windows,core" type="submit">
         <ion-icon name="checkmark"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-  <ion-list>
-    <ion-item>
-      <ion-label floating>任务名称</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>详细描述</ion-label>
-      <ion-textarea></ion-textarea>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>客户联络方式</ion-label>
-      <ion-textarea></ion-textarea>
-    </ion-item>
-    <ion-item>
-      <ion-label>销售负责人</ion-label>
-      <ion-select cancelText="取消" okText="确定">
-        <ion-option *ngFor="let emp of sellers" [value]="emp.empId">{{emp.name}}</ion-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-label>要求完成日期</ion-label>
-      <ion-datetime displayFormat="YYYY年MM月DD日"></ion-datetime>
-    </ion-item>
-    <ion-item>
-      <ion-label>OC负责人</ion-label>
-      <ion-select cancelText="取消" okText="确定">
-        <ion-option *ngFor="let emp of OC" [value]="emp.empId">{{emp.name}}</ion-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-label>择执行负责人</ion-label>
-      <ion-select cancelText="取消" okText="确定">
-        <ion-option *ngFor="let emp of taskManagers" [value]="emp.empId">{{emp.name}}</ion-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>其他相关负责人员</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>任务计划开始日期</ion-label>
-      <ion-datetime displayFormat="YYYY年MM月DD日"></ion-datetime>
-    </ion-item>
-    <ion-item>
-      <ion-label>任务计划完成日期</ion-label>
-      <ion-datetime displayFormat="YYYY年MM月DD日"></ion-datetime>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>所属产品</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>所属项目</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
-  </ion-list>
+  <form (ngSubmit)="addTask()" #taskForm="ngForm">
+    <ion-list>
+      <ion-item>
+        <ion-label floating>任务名称</ion-label>
+        <ion-input type="text" [(ngModel)]="newTask.name" #taskName="ngModel" [required]="true" name="taskName"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>详细描述</ion-label>
+        <ion-textarea [(ngModel)]="newTask.description" #description="ngModel" name="description"></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>客户联络方式</ion-label>
+        <ion-textarea [(ngModel)]="newTask.customerContact" #customerContact="ngModel" name="customerContact">></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-label>销售负责人</ion-label>
+        <ion-select cancelText="取消" okText="确定" [(ngModel)]="sellerId" #sellerIdSelect="ngModel" name="sellerIdSelect" [required]="true">
+          <ion-option *ngFor="let emp of sellers" [value]="emp.empId">{{emp.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>要求完成日期</ion-label>
+        <ion-datetime displayFormat="YYYY年MM月DD日" [(ngModel)]="newTask.requiringEndDate" #requiringEndDate="ngModel" name="requiringEndDate"></ion-datetime>
+      </ion-item>
+      <div *ngIf="!isSeller">
+        <ion-item>
+          <ion-label>OC负责人</ion-label>
+          <ion-select cancelText="取消" okText="确定" [(ngModel)]="OCId" #OCIdSelect="ngModel" name="OCIdSelect" [required]="!isSeller">
+            <ion-option *ngFor="let emp of OC" [value]="emp.empId">{{emp.name}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>择执行负责人</ion-label>
+          <ion-select cancelText="取消" okText="确定" [(ngModel)]="taskManagerId" #taskManagerIdSelect="ngModel" name="taskManagerIdSelect"
+            [required]="!isSeller && !isOC">
+            <ion-option *ngFor="let emp of taskManagers" [value]="emp.empId">{{emp.name}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>其他相关负责人员</ion-label>
+          <ion-input type="text" [(ngModel)]="newTask.otherExecutors" #otherExecutors="ngModel" name="otherExecutors"></ion-input>
+        </ion-item>
+      </div>
+      <div *ngIf="!isSeller && !isOC">
+        <ion-item>
+          <ion-label>任务计划开始日期</ion-label>
+          <ion-datetime displayFormat="YYYY年MM月DD日" [(ngModel)]="newTask.planningBeginDate" #planningBeginDate="ngModel" name="planningBeginDate"
+            [required]="(isTaskManager && !isTaskAdmin) || newTask.planningEndDate != null"></ion-datetime>
+        </ion-item>
+        <ion-item>
+          <ion-label>任务计划完成日期</ion-label>
+          <ion-datetime displayFormat="YYYY年MM月DD日" [(ngModel)]="newTask.planningEndDate" #planningEndDate="ngModel" name="planningEndDate"
+            [required]="(isTaskManager && !isTaskAdmin) || newTask.planningBeginDate != null"></ion-datetime>
+        </ion-item>
+      </div>
+      <ion-item>
+        <ion-label floating>所属产品</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>所属项目</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+    </ion-list>
+  </form>
 </ion-content>

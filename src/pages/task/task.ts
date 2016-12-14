@@ -16,7 +16,7 @@ import { TaskService } from '../../providers/task.service';
   templateUrl: 'task.html'
 })
 export class TaskPage {
-  tasks: Task[] = [];
+  tasks: Task[] = null;
   constructor(public navCtrl: NavController,
     public appCtrl: App,
     public menu: MenuController,
