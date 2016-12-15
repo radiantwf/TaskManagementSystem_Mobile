@@ -15,10 +15,6 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-  <ion-refresher (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新页面" refreshingSpinner="circles" refreshingText="刷新中......">
-    </ion-refresher-content>
-  </ion-refresher>
   <div class="dynamic">
     <template ngFor let-record [ngForOf]="list">
       <div [ngClass]="{'other': record?.personId !== empId, 'me': record?.personId === empId}">
@@ -38,6 +34,10 @@
       </div>
     </template>
   </div>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="circles" loadingText="获取最新信息">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
 <ion-footer>
   <ion-toolbar>

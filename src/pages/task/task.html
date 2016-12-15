@@ -13,7 +13,7 @@
     </ion-buttons>
     <ion-title item-center>任务一览</ion-title>
     <ion-buttons right>
-      <button ion-button icon-only (click)="addTask()">
+      <button ion-button icon-only (click)="createTask()">
         <ion-icon name="add"></ion-icon>
       </button>
     </ion-buttons>
@@ -24,7 +24,7 @@
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新页面" refreshingSpinner="circles" refreshingText="刷新中......">
     </ion-refresher-content>
   </ion-refresher>
-  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+  <ion-searchbar [(ngModel)]="searchCriteria" (ionInput)="searchTask($event)"></ion-searchbar>
   <ion-list>
     <ion-item *ngFor="let task of tasks" (click)="showDetail({taskId: task.id})">
       <h2>

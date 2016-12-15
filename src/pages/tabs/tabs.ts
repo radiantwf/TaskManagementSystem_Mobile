@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, MenuController, App, Tabs, NavController } from 'ionic-angular';
+import { Platform, MenuController, App, Tab, Tabs, NavController } from 'ionic-angular';
 import { Global } from '../../providers/global';
 
 import { SigninPage } from '../signin/signin';
@@ -13,12 +13,16 @@ import { AtMePage } from '../at-me/at-me';
 })
 export class TabsPage {
   @ViewChild('myTabs') tabRef: Tabs;
+  currentTab: Tab;
   // this tells the tabs component which Pages
   // should be each tab's root Page
   tab1Root: any = TaskPage;
   tab2Root: any = ProductPage;
   tab3Root: any = ProjectPage;
   tab4Root: any = AtMePage;
+  toggleLabel: string = '只看我';
+  toggleValue: boolean = true;
+  toggleNgIf: boolean = true;
 
   constructor(public platform: Platform,
     public appCtrl: App,
@@ -37,6 +41,28 @@ export class TabsPage {
   openPage(index) {
     // navigate to the new page if it is not the current page
     this.menu.close();
-    this.tabRef.select(index);
+    if (index > 0) {
+      this.tabRef.select(index);
+    } else {
+      this.tabRef.select(this.tabRef.getIndex(this.currentTab));
+    }
+  }
+  onToggleChanged(event) {
+    if (this.toggleValue) {
+      this.toggleLabel = '只看我';
+    } else {
+      this.toggleLabel = '所有';
+    }
+    this.openPage(-1);
+  }
+  onTabChanged(event) {
+    this.currentTab = event as Tab;
+    console.log(this.currentTab.tabTitle);
+    if (this.currentTab.tabTitle === "产品"
+      || this.currentTab.tabTitle === "@我") {
+      this.toggleNgIf = false;
+    } else {
+      this.toggleNgIf = true;
+    }
   }
 }

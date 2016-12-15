@@ -38,11 +38,11 @@ export class CommunicationsPage {
         this.list = communications;
       });
   }
-  doRefresh(refresher) {
+  doInfinite(infiniteScroll) {
     this.communicationsService.getCommunicationsById(this.id)
       .subscribe(communications => {
         this.list = communications;
-        refresher.complete();
+        infiniteScroll.complete();
       });
   }
   addCommunication() {
