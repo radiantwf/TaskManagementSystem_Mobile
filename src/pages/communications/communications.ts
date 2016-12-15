@@ -32,7 +32,7 @@ export class CommunicationsPage {
     this.navCtrl.pop();
   }
 
-  ionViewWillEnter() {
+  ionViewDidEnter() {
     this.communicationsService.getCommunicationsById(this.id)
       .subscribe(communications => {
         this.list = communications;

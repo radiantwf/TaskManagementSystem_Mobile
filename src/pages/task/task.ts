@@ -54,7 +54,7 @@ export class TaskPage {
   createTask() {
     this.appCtrl.getRootNav().push(CreateTaskPage);
   }
-  ionViewWillEnter() {
+  ionViewDidEnter() {
     console.log(this.navParams.get('charging'));
     this.page = 1;
     this.searchCriteria = '';
