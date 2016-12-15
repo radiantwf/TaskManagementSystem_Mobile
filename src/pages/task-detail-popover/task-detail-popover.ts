@@ -15,7 +15,7 @@ export class TaskDetailPopoverPage {
 
   constructor(public navCtrl: NavController) {}
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     console.log('Hello TaskDetailPopoverPage Page');
   }
 

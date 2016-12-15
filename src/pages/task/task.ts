@@ -33,8 +33,26 @@ export class TaskPage {
   addTask() {
     this.appCtrl.getRootNav().push(CreateTaskPage);
   }
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     this.taskService.getTasks(null, null, 1)
       .subscribe(tasks => this.tasks = tasks);
+  }
+  doInfinite(infiniteScroll) {
+    console.log('Begin async operation');
+
+    setTimeout(() => {
+      for (var i = 0; i < 30; i++) {
+      }
+
+      console.log('Async operation has ended');
+      infiniteScroll.complete();
+    }, 500);
+  }
+  doRefresh(refresher) {
+    this.taskService.getTasks(null, null, 1)
+      .subscribe(tasks => {
+        this.tasks = tasks;
+        refresher.complete();
+      });
   }
 }

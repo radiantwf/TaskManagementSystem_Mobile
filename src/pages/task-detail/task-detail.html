@@ -20,6 +20,10 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新页面" refreshingSpinner="circles" refreshingText="刷新中......">
+    </ion-refresher-content>
+  </ion-refresher>
   <ion-fab right bottom>
     <button ion-fab mini (click)="communicate()">
         <ion-icon name="chatbubbles"></ion-icon>

@@ -34,7 +34,7 @@ export class AtMePage {
   addTask() {
     this.appCtrl.getRootNav().push(CreateTaskPage);
   }
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     this.taskService.getTasks(null, 'processing', 1)
       .subscribe(tasks => this.tasks = tasks);
   }

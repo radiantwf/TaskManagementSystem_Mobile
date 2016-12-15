@@ -25,7 +25,7 @@ export class SigninPage {
   username: string = 'testoc';
   password: string = 'test';
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
   }
 
   siginin() {

@@ -34,10 +34,17 @@ export class TaskDetailPage {
   back() {
     this.navCtrl.pop();
   }
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     this.taskService.getTask(this.taskId)
       .subscribe(task => {
         this.task = task;
+      });
+  }
+  doRefresh(refresher) {
+    this.taskService.getTask(this.taskId)
+      .subscribe(task => {
+        this.task = task;
+        refresher.complete();
       });
   }
   presentActionSheet() {

@@ -32,13 +32,19 @@ export class CommunicationsPage {
     this.navCtrl.pop();
   }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     this.communicationsService.getCommunicationsById(this.id)
       .subscribe(communications => {
         this.list = communications;
       });
   }
-
+  doRefresh(refresher) {
+    this.communicationsService.getCommunicationsById(this.id)
+      .subscribe(communications => {
+        this.list = communications;
+        refresher.complete();
+      });
+  }
   addCommunication() {
     if (!this.content) { return; }
     let communication = new Communication(this.id, this.global.CurrentUser.empId, null, new Date(Date.now()), this.content);

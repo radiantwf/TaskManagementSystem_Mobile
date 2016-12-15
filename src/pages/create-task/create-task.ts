@@ -67,7 +67,7 @@ export class CreateTaskPage {
     });
   }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     let user = this.global.CurrentUser;
     if (user != null) {
       this.isOC = user.permissions.findIndex(value => (value === 99)) >= 0;

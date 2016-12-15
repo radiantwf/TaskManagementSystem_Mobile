@@ -15,7 +15,7 @@ export class ProjectPage {
 
   constructor(public navCtrl: NavController) {}
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     console.log('Hello ProjectPage Page');
   }
 
