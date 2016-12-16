@@ -15,7 +15,7 @@ export class ProductPage {
 
   constructor(public navCtrl: NavController) {}
 
-  ionViewDidEnter() {
+  ionViewWillEnter() {
     console.log('Hello ProductPage Page');
   }
 

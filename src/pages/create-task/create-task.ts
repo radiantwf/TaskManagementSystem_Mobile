@@ -7,6 +7,7 @@ import { TaskService } from './../../providers/task.service';
 import { EmployeeService } from './../../providers/employee.service';
 
 import { Global } from '../../providers/global';
+import { UserDefinedEventsService } from '../../providers/user-defined-events.service';
 
 /*
   Generated class for the CreateTask page.
@@ -38,7 +39,8 @@ export class CreateTaskPage {
     public alertCtrl: AlertController,
     public taskService: TaskService,
     public employeeService: EmployeeService,
-    public global: Global) {
+    public global: Global,
+    public events: UserDefinedEventsService) {
 
   }
 
@@ -60,6 +62,7 @@ export class CreateTaskPage {
             text: '确定',
             handler: data => {
               this.navCtrl.pop();
+              this.events.taskCreatedPublish();
             }
           }]
       });
@@ -67,7 +70,7 @@ export class CreateTaskPage {
     });
   }
 
-  ionViewDidEnter() {
+  ionViewWillEnter() {
     let user = this.global.CurrentUser;
     if (user != null) {
       this.isOC = user.permissions.findIndex(value => (value === 99)) >= 0;

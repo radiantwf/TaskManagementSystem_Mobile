@@ -34,7 +34,7 @@ export class TaskDetailPage {
   back() {
     this.navCtrl.pop();
   }
-  ionViewDidEnter() {
+  ionViewWillEnter() {
     this.taskService.getTask(this.taskId)
       .subscribe(task => {
         this.task = task;

@@ -4,6 +4,7 @@ import { TaskDetailPage } from '../task-detail/task-detail';
 import { CreateTaskPage } from '../create-task/create-task';
 import { Task } from '../../model/task';
 import { TaskService } from '../../providers/task.service';
+import { UserDefinedEventsService } from '../../providers/user-defined-events.service';
 
 /*
   Generated class for the Task page.
@@ -19,12 +20,16 @@ export class TaskPage {
   tasks: Array<Task> = null;
   page: number = 1;
   searchCriteria: string = '';
-
+  searchCriteria2: string = '';
+  onlyRelatedToMe: boolean = true;
+  onOnlyRelatedToMeChanged: any = null;
+  onTaskCreated: any = null;
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public appCtrl: App,
     public menu: MenuController,
-    public taskService: TaskService) {
+    public taskService: TaskService,
+    public events: UserDefinedEventsService) {
     menu.enable(true);
   }
 
@@ -33,7 +38,7 @@ export class TaskPage {
   }
   searchTask(event) {
     this.page = 1;
-    this.taskService.getTasks(this.searchCriteria, null, this.page)
+    this.taskService.getTasks(this.searchCriteria, this.searchCriteria2, this.page)
       .subscribe(tasks => {
         this.tasks = null;
         this.addTasks(tasks);
@@ -54,18 +59,8 @@ export class TaskPage {
   createTask() {
     this.appCtrl.getRootNav().push(CreateTaskPage);
   }
-  ionViewDidEnter() {
-    console.log(this.navParams.get('charging'));
-    this.page = 1;
-    this.searchCriteria = '';
-    this.taskService.getTasks(this.searchCriteria, null, this.page)
-      .subscribe(tasks => {
-        this.tasks = null;
-        this.addTasks(tasks);
-      });
-  }
   doInfinite(infiniteScroll) {
-    this.taskService.getTasks(this.searchCriteria, null, this.page + 1)
+    this.taskService.getTasks(this.searchCriteria, this.searchCriteria2, this.page + 1)
       .subscribe(tasks => {
         if (tasks != null && tasks.length > 0) {
           this.addTasks(tasks);
@@ -75,12 +70,37 @@ export class TaskPage {
       });
   }
   doRefresh(refresher) {
+    this.reloadTasks(refresher);
+  }
+  reloadTasks(elementComplete: any) {
     this.page = 1;
-    this.taskService.getTasks(this.searchCriteria, null, this.page)
+    if (this.onlyRelatedToMe === true) {
+      this.searchCriteria2 = 'charging';
+    } else {
+      this.searchCriteria2 = '';
+    }
+    this.taskService.getTasks(this.searchCriteria, this.searchCriteria2, this.page)
       .subscribe(tasks => {
         this.tasks = null;
         this.addTasks(tasks);
-        refresher.complete();
+        if (elementComplete != null) {
+          elementComplete.complete();
+        }
       });
+  }
+  ionViewDidLoad() {
+    this.onOnlyRelatedToMeChanged = (eventData) => {
+      this.onlyRelatedToMe = eventData[0];
+      this.reloadTasks(null);
+    };
+    this.onTaskCreated = () => {
+      this.reloadTasks(null);
+    };
+    this.events.relatedToMeToggleSubscribe(this.onOnlyRelatedToMeChanged);
+    this.events.taskCreatedSubscribe(this.onTaskCreated);
+  }
+  ionViewWillUnload() {
+    this.events.relatedToMeToggleUnsubscribe(this.onOnlyRelatedToMeChanged);
+    this.events.taskCreatedUnsubscribe(this.onTaskCreated);
   }
 }

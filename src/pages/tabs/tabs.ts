@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Platform, MenuController, App, Tab, Tabs, NavController } from 'ionic-angular';
 import { Global } from '../../providers/global';
+import { UserDefinedEventsService } from '../../providers/user-defined-events.service';
 
 import { SigninPage } from '../signin/signin';
 import { TaskPage } from '../task/task';
@@ -28,6 +29,7 @@ export class TabsPage {
     public appCtrl: App,
     public menu: MenuController,
     public global: Global,
+    public events: UserDefinedEventsService,
     public navCtrl: NavController) {
   }
   exit() {
@@ -43,8 +45,6 @@ export class TabsPage {
     this.menu.close();
     if (index > 0) {
       this.tabRef.select(index);
-    } else {
-      this.tabRef.select(this.tabRef.getIndex(this.currentTab));
     }
   }
   onToggleChanged(event) {
@@ -53,11 +53,11 @@ export class TabsPage {
     } else {
       this.toggleLabel = '所有';
     }
-    this.openPage(-1);
+    this.menu.close();
+    this.events.relatedToMeTogglePublish(this.toggleValue);
   }
   onTabChanged(event) {
     this.currentTab = event as Tab;
-    console.log(this.currentTab.tabTitle);
     if (this.currentTab.tabTitle === "产品"
       || this.currentTab.tabTitle === "@我") {
       this.toggleNgIf = false;

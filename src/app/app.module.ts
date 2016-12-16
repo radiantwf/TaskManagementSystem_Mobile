@@ -13,12 +13,14 @@ import { ProductDetailPage } from '../pages/product-detail/product-detail';
 import { CreateTaskPage } from '../pages/create-task/create-task';
 import { AtMePage } from '../pages/at-me/at-me';
 import { Global } from '../providers/global';
+import { Storage } from '@ionic/storage';
 import { UserService } from '../providers/user.service';
 import { EmployeeService } from '../providers/employee.service';
 import { TaskService } from '../providers/task.service';
 import { ProjectService } from '../providers/project.service';
 import { ProductService } from '../providers/product.service';
 import { CommunicationsService } from '../providers/communications.service';
+import { UserDefinedEventsService } from '../providers/user-defined-events.service';
 
 @NgModule({
   declarations: [
@@ -55,12 +57,14 @@ import { CommunicationsService } from '../providers/communications.service';
   ],
   providers: [
     Global,
+    Storage,
     UserService,
     EmployeeService,
     TaskService,
     ProjectService,
     ProductService,
     CommunicationsService,
+    UserDefinedEventsService,
     {
       provide: ErrorHandler,
       useClass: IonicErrorHandler
