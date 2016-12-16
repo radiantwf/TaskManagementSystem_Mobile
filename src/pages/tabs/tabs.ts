@@ -43,7 +43,7 @@ export class TabsPage {
   openPage(index) {
     // navigate to the new page if it is not the current page
     this.menu.close();
-    if (index > 0) {
+    if (index >= 0) {
       this.tabRef.select(index);
     }
   }
