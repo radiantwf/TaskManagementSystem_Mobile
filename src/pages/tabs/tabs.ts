@@ -1,8 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { Platform, MenuController, App, Tab, Tabs, NavController } from 'ionic-angular';
 import { Global } from '../../providers/global';
+import { Storage } from '@ionic/storage';
 import { UserDefinedEventsService } from '../../providers/user-defined-events.service';
-
 import { SigninPage } from '../signin/signin';
 import { TaskPage } from '../task/task';
 import { ProductPage } from '../product/product';
@@ -29,6 +29,7 @@ export class TabsPage {
     public appCtrl: App,
     public menu: MenuController,
     public global: Global,
+    private storage: Storage,
     public events: UserDefinedEventsService,
     public navCtrl: NavController) {
   }
@@ -38,6 +39,8 @@ export class TabsPage {
   signout() {
     this.global.LocalToken = null;
     this.global.CurrentUser = null;
+    this.storage.remove('username');
+    this.storage.remove('pwd');
     this.appCtrl.getRootNav().setRoot(SigninPage);
   }
   openPage(index) {
