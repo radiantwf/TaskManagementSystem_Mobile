@@ -12,7 +12,7 @@
       </button>
     </ion-buttons>
     <ion-title item-center>任务详细</ion-title>
-    <ion-buttons end>
+    <ion-buttons *ngIf="menuAble" end>
       <button ion-button icon-only (click)="presentActionSheet()">
         <ion-icon name="more"></ion-icon>
       </button>
