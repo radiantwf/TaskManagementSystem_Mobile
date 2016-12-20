@@ -85,11 +85,11 @@ export class CreateTaskPage {
   loadEmployees() {
     this.employeeService.getEmployee().subscribe(e => {
       this.employees = e;
-      this.ProcessEmployees();
+      this.processEmployees();
     });
   }
 
-  ProcessEmployees() {
+  processEmployees() {
     this.sellers = new Array<Employee>();
     this.OC = new Array<Employee>();
     this.taskManagers = new Array<Employee>();

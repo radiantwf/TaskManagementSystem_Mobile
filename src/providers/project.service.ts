@@ -12,7 +12,6 @@ import 'rxjs/add/operator/map';
 export class ProjectService {
 
   constructor(public http: Http) {
-    console.log('Hello ProjectService Provider');
   }
 
 }

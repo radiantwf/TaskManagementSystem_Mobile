@@ -17,7 +17,6 @@ export class Global {
   private static _pageSize: Number = 10;
 
   constructor(public http: Http) {
-    console.log('Hello Gobal Provider');
   }
   public get AppURL(): string {
     return Global._appURL;

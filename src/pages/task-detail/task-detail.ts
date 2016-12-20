@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, Platform, NavParams, ModalController, ViewController, ActionSheetController, AlertController } from 'ionic-angular';
+import { NavController, Platform, App, NavParams, ModalController, ViewController, ActionSheetController, AlertController } from 'ionic-angular';
 import { CommunicationsPage } from '../communications/communications';
+import { TaskEditPage } from '../task-edit/task-edit';
 import { TaskAssignModal } from '../task-assign-modal/task-assign-modal';
 import { Task } from '../../model/task';
 import { TaskService } from '../../providers/task.service';
@@ -44,6 +45,7 @@ export class TaskDetailPage {
   menuAble: boolean = false;
 
   constructor(public navCtrl: NavController,
+    public appCtrl: App,
     public platform: Platform,
     public params: NavParams,
     public viewCtrl: ViewController,
@@ -135,7 +137,7 @@ export class TaskDetailPage {
             this.finishAble = true;
           }
         }
-        if (task.status !== '已完成' && task.refuseStatus == null) {
+        if (task.status !== '已关闭') {
           if (this.isOC || this.isAdmin || this.isTaskAdmin) {
             this.closeAble = true;
           }
@@ -462,6 +464,7 @@ export class TaskDetailPage {
         text: '编辑',
         icon: !this.platform.is('ios') ? '' : null,
         handler: () => {
+          this.appCtrl.getRootNav().push(TaskEditPage, { taskId: this.taskId });
         }
       });
     }

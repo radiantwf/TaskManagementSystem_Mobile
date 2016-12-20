@@ -37,4 +37,13 @@ export class UserDefinedEventsService {
   taskCreatedUnsubscribe(handler): boolean {
     return this.unsubscribe('task:Created', handler);
   }
+  taskEditedPublish(taskId: string): any[] {
+    return this.publish('task:' + taskId + ' Edited', null);
+  }
+  taskEditedSubscribe(taskId: string, handler): void {
+    return this.subscribe('task:' + taskId + ' Edited', handler);
+  }
+  taskEditedUnsubscribe(taskId: string, handler): boolean {
+    return this.unsubscribe('task:' + taskId + ' Edited', handler);
+  }
 }

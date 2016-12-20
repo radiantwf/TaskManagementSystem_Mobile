@@ -1,0 +1,109 @@
+<!--
+  Generated template for the CreateTask page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar hideBackButton="true">
+    <ion-buttons start>
+      <button ion-button showWhen="ios" (click)="cancel()">
+        <span color="primary">取消</span>
+      </button>
+      <button ion-button icon-only showWhen="android,windows,core" (click)="cancel()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>编辑任务</ion-title>
+    <ion-buttons end>
+      <button ion-button showWhen="ios" (click)="editingTaskForm.onSubmit($event)" [disabled]="!editingTaskForm.form.valid">
+        <span color="primary">保存</span>
+      </button>
+      <button ion-button icon-only showWhen="android,windows,core" (click)="editingTaskForm.onSubmit($event)" [disabled]="!editingTaskForm.form.valid">
+        <ion-icon name="checkmark"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新页面" refreshingSpinner="circles" refreshingText="刷新中......">
+    </ion-refresher-content>
+  </ion-refresher>
+  <form (ngSubmit)="editTask()" #editingTaskForm="ngForm">
+    <ion-list>
+      <ion-item>
+        <ion-label floating>任务名称</ion-label>
+        <ion-input type="text" [(ngModel)]="srcTask.id" #taskId="ngModel" readonly name="taskId"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>任务名称</ion-label>
+        <ion-input type="text" [(ngModel)]="srcTask.name" (ngModelChange)="editingTask.name=$event;editted=true;" #taskName="ngModel"
+          name="taskName"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>详细描述</ion-label>
+        <ion-textarea [(ngModel)]="srcTask.description" (ngModelChange)="editingTask.description=$event;editted=true;" #description="ngModel"
+          name="description"></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>客户联络方式</ion-label>
+        <ion-textarea [(ngModel)]="srcTask.customerContact" (ngModelChange)="editingTask.customerContact=$event;editted=true;" #customerContact="ngModel"
+          name="customerContact">></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-label>销售负责人</ion-label>
+        <ion-select cancelText="取消" okText="确定" [(ngModel)]="srcTask.primarySellerId" (ngModelChange)="editingTask.primarySellerId=$event;editted=true;"
+          #sellerIdSelect="ngModel" name="sellerIdSelect" [required]="true">
+          <ion-option *ngFor="let emp of sellers" [value]="emp.empId">{{emp.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>要求完成日期</ion-label>
+        <ion-datetime displayFormat="YYYY年MM月DD日" [(ngModel)]="srcTask.requiringEndDate" (ngModelChange)="editingTask.requiringEndDate=$event;editted=true;"
+          #requiringEndDate="ngModel" name="requiringEndDate"></ion-datetime>
+      </ion-item>
+      <div *ngIf="!isSeller">
+        <ion-item>
+          <ion-label>OC负责人</ion-label>
+          <ion-select cancelText="取消" okText="确定" [(ngModel)]="srcTask.primaryOCId" (ngModelChange)="editingTask.primaryOCId=$event;editted=true;"
+            #OCIdSelect="ngModel" name="OCIdSelect" [required]="!isSeller">
+            <ion-option *ngFor="let emp of OC" [value]="emp.empId">{{emp.name}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>执行负责人</ion-label>
+          <ion-select cancelText="取消" okText="确定" [(ngModel)]="srcTask.primaryExecutorId" (ngModelChange)="editingTask.primaryExecutorId=$event;editted=true;"
+            #taskManagerIdSelect="ngModel" name="taskManagerIdSelect" [required]="!isSeller && !isOC">
+            <ion-option *ngFor="let emp of taskManagers" [value]="emp.empId">{{emp.name}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>其他相关负责人员</ion-label>
+          <ion-input type="text" [(ngModel)]="srcTask.otherExecutors" (ngModelChange)="editingTask.otherExecutors=$event;editted=true;"
+            #otherExecutors="ngModel" name="otherExecutors"></ion-input>
+        </ion-item>
+      </div>
+      <div *ngIf="!isSeller && !isOC">
+        <ion-item>
+          <ion-label>任务计划开始日期</ion-label>
+          <ion-datetime displayFormat="YYYY年MM月DD日" [(ngModel)]="srcTask.planningBeginDate" (ngModelChange)="editingTask.planningBeginDate=$event;editted=true;"
+            #planningBeginDate="ngModel" name="planningBeginDate" [required]="(isTaskManager && !isTaskAdmin) || srcTask.planningEndDate != null"></ion-datetime>
+        </ion-item>
+        <ion-item>
+          <ion-label>任务计划完成日期</ion-label>
+          <ion-datetime displayFormat="YYYY年MM月DD日" [(ngModel)]="srcTask.planningEndDate" (ngModelChange)="editingTask.planningEndDate=$event;editted=true;"
+            #planningEndDate="ngModel" name="planningEndDate" [required]="(isTaskManager && !isTaskAdmin) || srcTask.planningBeginDate != null"></ion-datetime>
+        </ion-item>
+      </div>
+      <ion-item>
+        <ion-label floating>所属产品</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>所属项目</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>

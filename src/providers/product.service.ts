@@ -12,7 +12,6 @@ import 'rxjs/add/operator/map';
 export class ProductService {
 
   constructor(public http: Http) {
-    console.log('Hello ProductService Provider');
   }
 
 }

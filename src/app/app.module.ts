@@ -8,6 +8,7 @@ import { TaskPage } from '../pages/task/task';
 import { ProjectPage } from '../pages/project/project';
 import { ProductPage } from '../pages/product/product';
 import { TaskDetailPage } from '../pages/task-detail/task-detail';
+import { TaskEditPage } from '../pages/task-edit/task-edit';
 import { TaskAssignModal } from '../pages/task-assign-modal/task-assign-modal';
 import { ProjectDetailPage } from '../pages/project-detail/project-detail';
 import { ProductDetailPage } from '../pages/product-detail/product-detail';
@@ -28,6 +29,7 @@ import { UserDefinedEventsService } from '../providers/user-defined-events.servi
     MyApp,
     TaskPage,
     TaskDetailPage,
+    TaskEditPage,
     TaskAssignModal,
     CreateTaskPage,
     ProjectPage,
@@ -47,6 +49,7 @@ import { UserDefinedEventsService } from '../providers/user-defined-events.servi
     MyApp,
     TaskPage,
     TaskDetailPage,
+    TaskEditPage,
     TaskAssignModal,
     CreateTaskPage,
     ProjectPage,

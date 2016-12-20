@@ -16,7 +16,6 @@ export class ProjectDetailPage {
   constructor(public navCtrl: NavController) {}
 
   ionViewWillEnter() {
-    console.log('Hello ProjectDetailPage Page');
   }
 
 }

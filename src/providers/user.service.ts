@@ -17,7 +17,6 @@ export class UserService {
   // private userUrl = `${this.global.AppURL}/user`;  // URL to web api
 
   constructor(public http: Http, private global: Global) {
-    console.log('Hello UserService Provider');
   }
 
   signin(uid: string, password: string): Observable<boolean> {
