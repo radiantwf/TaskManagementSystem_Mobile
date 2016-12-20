@@ -58,7 +58,7 @@
           </ion-select>
         </ion-item>
         <ion-item>
-          <ion-label>择执行负责人</ion-label>
+          <ion-label>执行负责人</ion-label>
           <ion-select cancelText="取消" okText="确定" [(ngModel)]="taskManagerId" #taskManagerIdSelect="ngModel" name="taskManagerIdSelect"
             [required]="!isSeller && !isOC">
             <ion-option *ngFor="let emp of taskManagers" [value]="emp.empId">{{emp.name}}</ion-option>

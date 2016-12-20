@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, Platform, NavParams, ViewController, ActionSheetController, AlertController } from 'ionic-angular';
+import { NavController, Platform, NavParams, ModalController, ViewController, ActionSheetController, AlertController } from 'ionic-angular';
 import { CommunicationsPage } from '../communications/communications';
+import { TaskAssignModal } from '../task-assign-modal/task-assign-modal';
 import { Task } from '../../model/task';
 import { TaskService } from '../../providers/task.service';
 import { Global } from '../../providers/global';
@@ -47,6 +48,7 @@ export class TaskDetailPage {
     public params: NavParams,
     public viewCtrl: ViewController,
     public alertCtrl: AlertController,
+    public modalCtrl: ModalController,
     private actionSheetCtrl: ActionSheetController,
     private navParams: NavParams,
     private taskService: TaskService,
@@ -180,34 +182,18 @@ export class TaskDetailPage {
         text: '分配',
         icon: !this.platform.is('ios') ? '' : null,
         handler: () => {
-          let confirmAlert = this.alertCtrl.create({
-            title: '分配任务',
-            message: '请选择当前任务的实际开始时间：',
-            inputs: [
-              {
-                name: 'dateBegin',
-                type: 'date'
-              },
-            ],
-            buttons: [
-              {
-                text: '取消'
-              },
-              {
-                text: '确定',
-                handler: (data) => {
-                  let newTask = new Task(this.taskId, '');
-                  newTask.realBeginDate = new Date(Date.parse(data.dateBegin));
-                  this.taskService.strat(newTask)
-                    .subscribe(() => {
-                      this.reloadTask(null);
-                      this.events.taskCreatedPublish();
-                    });
-                }
-              }
-            ]
+          let confirmModal = this.modalCtrl.create(TaskAssignModal, { task: this.task });
+          confirmModal.onDidDismiss((data) => {
+            let editingTask = data as Task;
+            if (editingTask == null)
+              return;
+            this.taskService.update(editingTask)
+              .subscribe(() => {
+                this.reloadTask(null);
+                this.events.taskCreatedPublish();
+              });
           });
-          confirmAlert.present();
+          confirmModal.present();
         }
       });
     }
@@ -221,8 +207,8 @@ export class TaskDetailPage {
             message: '请选择当前任务的计划周期：',
             inputs: [
               {
-                name: 'oc',
-                type: 'select',
+                name: 'dateBegin',
+                type: 'date',
                 placeholder: '计划开始日期'
               },
               {
@@ -238,7 +224,7 @@ export class TaskDetailPage {
               {
                 text: '确定',
                 handler: (data) => {
-                  let newTask = new Task(this.taskId, '');
+                  let newTask = new Task(this.taskId, null);
                   newTask.planningBeginDate = new Date(Date.parse(data.dateBegin));
                   newTask.planningBeginDate = new Date(Date.parse(data.dateEnd));
                   this.taskService.strat(newTask)
@@ -248,7 +234,8 @@ export class TaskDetailPage {
                     });
                 }
               }
-            ]
+            ],
+            enableBackdropDismiss: false
           });
           confirmAlert.present();
         }
@@ -279,7 +266,7 @@ export class TaskDetailPage {
               {
                 text: '确定',
                 handler: (data) => {
-                  let newTask = new Task(this.taskId, '');
+                  let newTask = new Task(this.taskId, null);
                   newTask.refuseReason = data.reason;
                   this.taskService.refuse(newTask)
                     .subscribe(() => {
@@ -288,7 +275,8 @@ export class TaskDetailPage {
                     });
                 }
               }
-            ]
+            ],
+            enableBackdropDismiss: false
           });
           confirmAlert.present();
         }
@@ -309,7 +297,7 @@ export class TaskDetailPage {
               {
                 text: '确定',
                 handler: (data) => {
-                  let newTask = new Task(this.taskId, '');
+                  let newTask = new Task(this.taskId, null);
                   newTask.realBeginDate = new Date(Date.parse(data.dateBegin));
                   this.taskService.strat(newTask)
                     .subscribe(() => {
@@ -318,7 +306,8 @@ export class TaskDetailPage {
                     });
                 }
               }
-            ]
+            ],
+            enableBackdropDismiss: false
           });
           confirmAlert.present();
         }
@@ -346,7 +335,7 @@ export class TaskDetailPage {
               {
                 text: '确定',
                 handler: (data) => {
-                  let newTask = new Task(this.taskId, '');
+                  let newTask = new Task(this.taskId, null);
                   newTask.realBeginDate = new Date(Date.parse(data.dateBegin));
                   this.taskService.strat(newTask)
                     .subscribe(() => {
@@ -355,7 +344,8 @@ export class TaskDetailPage {
                     });
                 }
               }
-            ]
+            ],
+            enableBackdropDismiss: false
           });
           confirmAlert.present();
         }
@@ -383,7 +373,7 @@ export class TaskDetailPage {
               {
                 text: '确定',
                 handler: (data) => {
-                  let newTask = new Task(this.taskId, '');
+                  let newTask = new Task(this.taskId, null);
                   newTask.percent = data.percent;
                   this.taskService.progress(newTask)
                     .subscribe(() => {
@@ -392,7 +382,8 @@ export class TaskDetailPage {
                     });
                 }
               }
-            ]
+            ],
+            enableBackdropDismiss: false
           });
           confirmAlert.present();
         }
@@ -420,7 +411,7 @@ export class TaskDetailPage {
               {
                 text: '确定',
                 handler: (data) => {
-                  let newTask = new Task(this.taskId, '');
+                  let newTask = new Task(this.taskId, null);
                   newTask.realEndDate = new Date(Date.parse(data.dateEnd));
                   this.taskService.finish(newTask)
                     .subscribe(() => {
@@ -429,7 +420,8 @@ export class TaskDetailPage {
                     });
                 }
               }
-            ]
+            ],
+            enableBackdropDismiss: false
           });
           confirmAlert.present();
         }
@@ -450,7 +442,7 @@ export class TaskDetailPage {
               {
                 text: '关闭',
                 handler: () => {
-                  let newTask = new Task(this.taskId, '');
+                  let newTask = new Task(this.taskId, null);
                   this.taskService.close(newTask)
                     .subscribe(() => {
                       this.navCtrl.pop();
@@ -458,7 +450,8 @@ export class TaskDetailPage {
                     });
                 }
               }
-            ]
+            ],
+            enableBackdropDismiss: false
           });
           confirmAlert.present();
         }
@@ -497,7 +490,8 @@ export class TaskDetailPage {
                     });
                 }
               }
-            ]
+            ],
+            enableBackdropDismiss: false
           });
           confirmAlert.present();
         }

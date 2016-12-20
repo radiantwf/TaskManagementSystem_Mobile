@@ -1,0 +1,50 @@
+<!--
+  Generated template for the TaskAssignModal page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      分配任务
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <span color="primary" showWhen="ios">Cancel</span>
+        <ion-icon name="md-close" showWhen="android,windows,core"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button showWhen="ios" (click)="assignForm.onSubmit($event)" [disabled]="!assignForm.form.valid">
+        <span color="primary">分配</span>
+      </button>
+      <button ion-button icon-only showWhen="android,windows,core" (click)="assignForm.onSubmit($event)" [disabled]="!assignForm.form.valid">
+        <ion-icon name="checkmark"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form (ngSubmit)="confirmModel()" #assignForm="ngForm">
+    <ion-list>
+      <ion-item>
+        <ion-label>OC负责人</ion-label>
+        <ion-select cancelText="取消" okText="确定" [(ngModel)]="editingTask.primaryOCId" #OCIdSelect="ngModel" name="OCIdSelect" required>
+          <ion-option *ngFor="let emp of OC" [value]="emp.empId">{{emp.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>执行负责人</ion-label>
+        <ion-select cancelText="取消" okText="确定" [(ngModel)]="editingTask.primaryExecutorId" #taskManagerIdSelect="ngModel" name="taskManagerIdSelect"
+          required>
+          <ion-option *ngFor="let emp of taskManagers" [value]="emp.empId">{{emp.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>其他相关负责人员</ion-label>
+        <ion-input type="text" [(ngModel)]="editingTask.otherExecutors" #otherExecutors="ngModel" name="otherExecutors"></ion-input>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>

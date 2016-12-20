@@ -8,6 +8,7 @@ import { SigninPage } from '../pages/signin/signin';
 })
 export class MyApp {
   rootPage = SigninPage;
+  exitAlertPopFlag = false;
   @ViewChild('rootNav') nav: NavController;
   constructor(public platform: Platform,
     public app: App,
@@ -31,6 +32,9 @@ export class MyApp {
     });
   }
   confirmExitApp() {
+    if (this.exitAlertPopFlag)
+      return;
+    this.exitAlertPopFlag = true;
     let confirmAlert = this.alertCtrl.create({
       title: '退出确认',
       message: '确定要退出本应用?',
@@ -38,15 +42,18 @@ export class MyApp {
         {
           text: '取消',
           handler: () => {
+            this.exitAlertPopFlag = false;
           }
         },
         {
           text: '退出',
           handler: () => {
             this.platform.exitApp();
+            this.exitAlertPopFlag = false;
           }
         }
-      ]
+      ],
+      enableBackdropDismiss: false
     });
     confirmAlert.present();
   }

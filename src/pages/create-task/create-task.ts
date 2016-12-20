@@ -87,7 +87,6 @@ export class CreateTaskPage {
       this.employees = e;
       this.ProcessEmployees();
     });
-
   }
 
   ProcessEmployees() {
