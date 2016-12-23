@@ -41,6 +41,12 @@ export class TaskEditPage {
 
   today: Date = new Date(Date.parse(new Date(Date.now()).toLocaleDateString()));
 
+  editingRequiringEndDate: string;
+  editingPlanningBeginDate: string;
+  editingPlanningEndDate: string;
+  editingRealBeginDate: string;
+  editingRealEndDate: string;
+
   constructor(public navCtrl: NavController,
     public platform: Platform,
     public params: NavParams,
@@ -83,6 +89,17 @@ export class TaskEditPage {
   }
 
   editTask() {
+    if (this.editingRequiringEndDate != null)
+      this.editingTask.requiringEndDate = new Date(Date.parse(this.editingRequiringEndDate));
+    if (this.editingPlanningBeginDate != null)
+      this.editingTask.planningBeginDate = new Date(Date.parse(this.editingPlanningBeginDate));
+    if (this.editingPlanningEndDate != null)
+      this.editingTask.planningEndDate = new Date(Date.parse(this.editingPlanningEndDate));
+    if (this.editingRealBeginDate != null)
+      this.editingTask.realBeginDate = new Date(Date.parse(this.editingRealBeginDate));
+    if (this.editingRealEndDate != null)
+      this.editingTask.realEndDate = new Date(Date.parse(this.editingRealEndDate));
+
     this.taskService.update(this.editingTask)
       .subscribe(() => {
         this.navCtrl.pop();
@@ -99,6 +116,7 @@ export class TaskEditPage {
           {
             text: '取消',
             handler: () => {
+              refresher.complete();
             }
           },
           {
@@ -107,7 +125,8 @@ export class TaskEditPage {
               this.reloadTask(refresher);
             }
           }
-        ]
+        ],
+        enableBackdropDismiss: false
       });
       confirmAlert.present();
     } else {

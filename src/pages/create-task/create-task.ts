@@ -26,6 +26,10 @@ export class CreateTaskPage {
   OC: Array<Employee>;
   taskManagers: Array<Employee>;
 
+  newRequiringEndDate: string;
+  newPlanningBeginDate: string;
+  newPlanningEndDate: string;
+
   sellerId: string;
   OCId: string;
   taskManagerId: string;
@@ -53,6 +57,14 @@ export class CreateTaskPage {
     this.newTask.primarySellerId = this.sellerId;
     this.newTask.primaryOCId = this.OCId;
     this.newTask.primaryExecutorId = this.taskManagerId;
+
+    if (this.newRequiringEndDate != null)
+      this.newTask.requiringEndDate = new Date(Date.parse(this.newRequiringEndDate));
+    if (this.newPlanningBeginDate != null)
+      this.newTask.planningBeginDate = new Date(Date.parse(this.newPlanningBeginDate));
+    if (this.newPlanningEndDate != null)
+      this.newTask.planningEndDate = new Date(Date.parse(this.newPlanningEndDate));
+
     this.taskService.create(this.newTask).subscribe(() => {
       let alert = this.alertCtrl.create({
         title: '新建任务',

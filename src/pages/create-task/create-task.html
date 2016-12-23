@@ -48,7 +48,7 @@
       </ion-item>
       <ion-item>
         <ion-label>要求完成日期</ion-label>
-        <ion-datetime displayFormat="YYYY年MM月DD日" [(ngModel)]="newTask.requiringEndDate" #requiringEndDate="ngModel" name="requiringEndDate"></ion-datetime>
+        <ion-datetime displayFormat="YYYY年MM月DD日" [(ngModel)]="newRequiringEndDate" #requiringEndDate="ngModel" name="requiringEndDate"></ion-datetime>
       </ion-item>
       <div *ngIf="!isSeller">
         <ion-item>
@@ -72,13 +72,13 @@
       <div *ngIf="!isSeller && !isOC">
         <ion-item>
           <ion-label>任务计划开始日期</ion-label>
-          <ion-datetime displayFormat="YYYY年MM月DD日" [(ngModel)]="newTask.planningBeginDate" #planningBeginDate="ngModel" name="planningBeginDate"
-            [required]="(isTaskManager && !isTaskAdmin) || newTask.planningEndDate != null"></ion-datetime>
+          <ion-datetime displayFormat="YYYY年MM月DD日" [(ngModel)]="newPlanningBeginDate" #planningBeginDate="ngModel" name="planningBeginDate"
+            [required]="(isTaskManager && !isTaskAdmin) || newPlanningEndDate != null"></ion-datetime>
         </ion-item>
         <ion-item>
           <ion-label>任务计划完成日期</ion-label>
-          <ion-datetime displayFormat="YYYY年MM月DD日" [(ngModel)]="newTask.planningEndDate" #planningEndDate="ngModel" name="planningEndDate"
-            [required]="(isTaskManager && !isTaskAdmin) || newTask.planningBeginDate != null"></ion-datetime>
+          <ion-datetime displayFormat="YYYY年MM月DD日" [(ngModel)]="newPlanningEndDate" #planningEndDate="ngModel" name="planningEndDate"
+            [required]="(isTaskManager && !isTaskAdmin) || newPlanningBeginDate != null"></ion-datetime>
         </ion-item>
       </div>
       <ion-item>
