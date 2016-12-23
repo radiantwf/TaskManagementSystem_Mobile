@@ -19,7 +19,7 @@
     </ion-buttons>
   </ion-navbar>
 </ion-header>
-<ion-content padding>
+<!--<ion-content padding>
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新页面" refreshingSpinner="circles" refreshingText="刷新中......">
     </ion-refresher-content>
@@ -38,4 +38,22 @@
     <ion-infinite-scroll-content loadingSpinner="circles" loadingText="获取更多数据......">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
+</ion-content>-->
+<ion-content padding>
+  <ion-card *ngFor="let task of tasks" (click)="showDetail({taskId: task.id})">
+    <ion-card-content>
+      <ion-row>
+        <h1>{{task.name}}</h1>
+      </ion-row>
+      <ion-row>
+        <ion-col width-80>
+          <p *ngIf="task.status==='进行中' ">计划完成日期：{{task.planningEndDate | date:"yyyy年MM月dd日 "}}</p>
+          <p *ngIf="task.status==='已完成' || (task.status==='已关闭' && task.realEndDate!=null)">实际完成日期：{{task.realEndDate | date:"yyyy年MM月dd日 "}}</p>
+        </ion-col>
+        <ion-col width-20 right class="taskstatus">
+          <p>{{task.status}}</p>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

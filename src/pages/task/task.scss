@@ -1,1 +1,16 @@
-page-task {}
+page-task {
+  .card-ios {
+    margin: 12px 0px;
+    width: 100%;
+  }
+  .card-content-ios {
+    border-top: 5px solid #2eb3fe;
+    padding: 15px 16px 10px 16px;
+  }
+  ion-col {
+    padding: 5px 0px;
+  }
+  .taskstatus {
+    text-align: right;
+  }
+}
