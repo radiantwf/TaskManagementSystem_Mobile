@@ -1,11 +1,34 @@
 page-task {
-  .card-ios {
-    margin: 12px 0px;
+  .searchbar-ios {
+    padding: 0px;
+    border-bottom: 0px solid rgba(0, 0, 0, 0.05);
+    background: rgba(0, 0, 0, 0);
+  }
+  .searchbar-ios .searchbar-search-icon {
+    top: 15px;
+  }
+  .searchbar-ios .searchbar-input {
+    height: 42px;
+  }
+  .searchbar-input-container {
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  .content {
+    background-color: #f5f5f5;
+  }
+  .searchbar-md {
+    padding: 0px;
+  }
+  .card {
+    margin: 18px 0px;
     width: 100%;
   }
-  .card-content-ios {
-    border-top: 5px solid #2eb3fe;
+  .card-content {
+    border-top: 3px solid #2eb3fe;
     padding: 15px 16px 10px 16px;
+  }
+  .card-content.activated {
+    border-top: 3px solid #fff;
   }
   ion-col {
     padding: 5px 0px;

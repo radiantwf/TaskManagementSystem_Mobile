@@ -40,10 +40,15 @@
   </ion-infinite-scroll>
 </ion-content>-->
 <ion-content padding>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新页面" refreshingSpinner="circles" refreshingText="刷新中......">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-searchbar [(ngModel)]="searchCriteria" (ionInput)="searchTask($event)"></ion-searchbar>
   <ion-card *ngFor="let task of tasks" (click)="showDetail({taskId: task.id})">
     <ion-card-content>
       <ion-row>
-        <h1>{{task.name}}</h1>
+        <h2>{{task.name}}</h2>
       </ion-row>
       <ion-row>
         <ion-col width-80>
@@ -56,4 +61,8 @@
       </ion-row>
     </ion-card-content>
   </ion-card>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="circles" loadingText="获取更多数据......">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
