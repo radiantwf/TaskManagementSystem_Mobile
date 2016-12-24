@@ -24,6 +24,8 @@ export class TaskPage {
   onlyRelatedToMe: boolean = true;
   onOnlyRelatedToMeChanged: any = null;
   onTaskCreated: any = null;
+  touchTaskId: string = null;
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public appCtrl: App,
@@ -34,7 +36,11 @@ export class TaskPage {
   }
 
   showDetail(id) {
+    if (id == null) {
+      return;
+    }
     this.appCtrl.getRootNav().push(TaskDetailPage, { taskId: id });
+    this.touchTaskId = null;
   }
   searchTask(event) {
     this.page = 1;
@@ -60,6 +66,7 @@ export class TaskPage {
     this.appCtrl.getRootNav().push(CreateTaskPage);
   }
   doInfinite(infiniteScroll) {
+    this.touchTaskId = null;
     this.taskService.getTasks(this.searchCriteria, this.searchCriteria2, this.page + 1)
       .subscribe(tasks => {
         if (tasks != null && tasks.length > 0) {
@@ -70,9 +77,12 @@ export class TaskPage {
       });
   }
   doRefresh(refresher) {
+    this.touchTaskId = null;
     this.reloadTasks(refresher);
   }
+
   reloadTasks(elementComplete: any) {
+    this.touchTaskId = null;
     this.page = 1;
     if (this.onlyRelatedToMe === true) {
       this.searchCriteria2 = 'charging';
@@ -87,6 +97,9 @@ export class TaskPage {
           elementComplete.complete();
         }
       });
+  }
+  ionViewDidEnter() {
+    this.touchTaskId = null;
   }
   ionViewDidLoad() {
     this.onOnlyRelatedToMeChanged = (eventData) => {

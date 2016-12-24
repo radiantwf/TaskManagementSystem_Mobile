@@ -1,3 +1,37 @@
 page-at-me {
-
+  .content {
+    background-color: #f5f5f5;
+  }
+  .searchbar-md {
+    padding: 0px;
+  }
+  .card {
+    margin: 18px 0px;
+    width: 100%;
+  }
+  .notstart {
+    border-top: 3px solid #cb93dd;
+  }
+  .finish {
+    border-top: 3px solid #cccccc;
+  }
+  .ongoing {
+    border-top: 3px solid #64decf;
+  }
+  .overtime {
+    border-top: 3px solid #f69679;
+  }
+  .card-content {
+    padding: 15px 16px 10px 16px;
+  }
+  .card-activated {
+    background-color: #f1f1f1;
+    box-shadow: 4px 4px 12px 6px rgba(0, 0, 0, 0.24);
+  }
+  ion-col {
+    padding: 5px 0px;
+  }
+  .taskstatus {
+    text-align: right;
+  }
 }

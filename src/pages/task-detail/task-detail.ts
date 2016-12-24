@@ -65,7 +65,7 @@ export class TaskDetailPage {
     this.navCtrl.pop();
   }
   ionViewWillEnter() {
-    this.taskId = this.navParams.get('taskId').taskId;
+    this.taskId = this.navParams.get('taskId');
     let user = this.global.CurrentUser;
     this.isAdmin = user.permissions.findIndex(value => (value === 1)) >= 0;
     this.isOC = user.permissions.findIndex(value => (value === 99)) >= 0;
@@ -182,7 +182,7 @@ export class TaskDetailPage {
     if (this.assignAble) {
       buttons.push({
         text: '分配',
-        icon: !this.platform.is('ios') ? '' : null,
+        icon: !this.platform.is('ios') ? 'none' : null,
         handler: () => {
           let confirmModal = this.modalCtrl.create(TaskAssignModal, { task: this.task });
           confirmModal.onDidDismiss((data) => {
@@ -202,7 +202,7 @@ export class TaskDetailPage {
     if (this.planAble) {
       buttons.push({
         text: '计划',
-        icon: !this.platform.is('ios') ? '' : null,
+        icon: !this.platform.is('ios') ? 'none' : null,
         handler: () => {
           let confirmAlert = this.alertCtrl.create({
             title: '计划任务任务',
@@ -249,7 +249,7 @@ export class TaskDetailPage {
     if (this.refuseAble) {
       buttons.push({
         text: '拒绝',
-        icon: !this.platform.is('ios') ? '' : null,
+        icon: !this.platform.is('ios') ? 'none' : null,
         handler: () => {
           let confirmAlert = this.alertCtrl.create({
             title: '拒绝任务',
@@ -287,7 +287,7 @@ export class TaskDetailPage {
     if (this.reactivedAble) {
       buttons.push({
         text: '重新激活',
-        icon: !this.platform.is('ios') ? '' : null,
+        icon: !this.platform.is('ios') ? 'none' : null,
         handler: () => {
           let confirmAlert = this.alertCtrl.create({
             title: '再次激活任务',
@@ -318,7 +318,7 @@ export class TaskDetailPage {
     if (this.startAble) {
       buttons.push({
         text: '开始',
-        icon: !this.platform.is('ios') ? '' : null,
+        icon: !this.platform.is('ios') ? 'none' : null,
         handler: () => {
           let confirmAlert = this.alertCtrl.create({
             title: '开始任务',
@@ -356,7 +356,7 @@ export class TaskDetailPage {
     if (this.progessAble) {
       buttons.push({
         text: '填写进度',
-        icon: !this.platform.is('ios') ? '' : null,
+        icon: !this.platform.is('ios') ? 'none' : null,
         handler: () => {
           let confirmAlert = this.alertCtrl.create({
             title: '任务进度',
@@ -394,7 +394,7 @@ export class TaskDetailPage {
     if (this.finishAble) {
       buttons.push({
         text: '完成',
-        icon: !this.platform.is('ios') ? '' : null,
+        icon: !this.platform.is('ios') ? 'none' : null,
         handler: () => {
           let confirmAlert = this.alertCtrl.create({
             title: '完成任务',
@@ -432,7 +432,7 @@ export class TaskDetailPage {
     if (this.closeAble) {
       buttons.push({
         text: '关闭',
-        icon: !this.platform.is('ios') ? '' : null,
+        icon: !this.platform.is('ios') ? 'none' : null,
         handler: () => {
           let confirmAlert = this.alertCtrl.create({
             title: '关闭任务',
@@ -462,7 +462,7 @@ export class TaskDetailPage {
     if (this.editAble) {
       buttons.push({
         text: '编辑',
-        icon: !this.platform.is('ios') ? '' : null,
+        icon: !this.platform.is('ios') ? 'none' : null,
         handler: () => {
           this.appCtrl.getRootNav().push(TaskEditPage, { taskId: this.taskId });
         }

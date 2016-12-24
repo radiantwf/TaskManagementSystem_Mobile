@@ -10,6 +10,7 @@ import { ProjectPage } from '../project/project';
 import { AtMePage } from '../at-me/at-me';
 
 @Component({
+  selector: 'tabs-mytabs',
   templateUrl: 'tabs.html'
 })
 export class TabsPage {

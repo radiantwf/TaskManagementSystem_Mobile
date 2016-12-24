@@ -19,34 +19,14 @@
     </ion-buttons>
   </ion-navbar>
 </ion-header>
-<!--<ion-content padding>
+<ion-content padding (touchend)="showDetail(touchTaskId)">
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新页面" refreshingSpinner="circles" refreshingText="刷新中......">
     </ion-refresher-content>
   </ion-refresher>
   <ion-searchbar [(ngModel)]="searchCriteria" (ionInput)="searchTask($event)"></ion-searchbar>
-  <ion-list>
-    <ion-item *ngFor="let task of tasks" (click)="showDetail({taskId: task.id})">
-      <h2>
-        <ion-icon name="list" item-left></ion-icon>{{task.name}}</h2>
-      <p *ngIf="task.status==='进行中'">计划完成日期：{{task.planningEndDate | date:"yyyy年MM月dd日"}}</p>
-      <p *ngIf="task.status==='已完成' || (task.status==='已关闭' && task.realEndDate!=null)">实际完成日期：{{task.realEndDate | date:"yyyy年MM月dd日"}}</p>
-      <div item-right>{{task.status}}</div>
-    </ion-item>
-  </ion-list>
-  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-    <ion-infinite-scroll-content loadingSpinner="circles" loadingText="获取更多数据......">
-    </ion-infinite-scroll-content>
-  </ion-infinite-scroll>
-</ion-content>-->
-<ion-content padding>
-  <ion-refresher (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新页面" refreshingSpinner="circles" refreshingText="刷新中......">
-    </ion-refresher-content>
-  </ion-refresher>
-  <ion-searchbar [(ngModel)]="searchCriteria" (ionInput)="searchTask($event)"></ion-searchbar>
-  <ion-card *ngFor="let task of tasks" (click)="showDetail({taskId: task.id})">
-    <ion-card-content>
+  <ion-card *ngFor="let task of tasks" (touchstart)="touchTaskId=task.id" [ngClass]="{'card-activated': touchTaskId === task.id}">
+    <ion-card-content [task-status]="task">
       <ion-row>
         <h2>{{task.name}}</h2>
       </ion-row>
