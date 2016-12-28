@@ -11,7 +11,7 @@ import { User } from '../model/user';
 */
 @Injectable()
 export class Global {
-  private static _appURL = 'http://task.hisign.top:6001/v1';
+  private static _appURL = 'http://127.0.0.1:8888/v1';
   private static _token = '';
   private static _currentUser: User = null;
   private static _pageSize: Number = 10;

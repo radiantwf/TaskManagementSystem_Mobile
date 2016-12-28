@@ -2,8 +2,12 @@ import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
 
 import { Task } from './../../model/task';
+import { Project } from './../../model/project';
+import { Product } from './../../model/product';
 import { Employee } from './../../model/employee';
 import { TaskService } from './../../providers/task.service';
+import { ProjectService } from './../../providers/project.service';
+import { ProductService } from './../../providers/product.service';
 import { EmployeeService } from './../../providers/employee.service';
 
 import { Global } from '../../providers/global';
@@ -25,6 +29,8 @@ export class CreateTaskPage {
   sellers: Array<Employee>;
   OC: Array<Employee>;
   taskManagers: Array<Employee>;
+  projects: Array<Project>;
+  products: Array<Product>;
 
   newRequiringEndDate: string;
   newPlanningBeginDate: string;
@@ -39,12 +45,14 @@ export class CreateTaskPage {
   isTaskAdmin: boolean = false;
   isTaskManager: boolean = false;
 
-  constructor(public navCtrl: NavController,
-    public alertCtrl: AlertController,
-    public taskService: TaskService,
-    public employeeService: EmployeeService,
-    public global: Global,
-    public events: UserDefinedEventsService) {
+  constructor(private navCtrl: NavController,
+    private alertCtrl: AlertController,
+    private taskService: TaskService,
+    private employeeService: EmployeeService,
+    private global: Global,
+    private events: UserDefinedEventsService,
+    private projectService: ProjectService,
+    private productService: ProductService) {
 
   }
 
@@ -92,6 +100,8 @@ export class CreateTaskPage {
     }
 
     this.loadEmployees();
+    this.projectService.getAllProjects().subscribe(p => this.projects = p);
+    this.productService.getAllProducts().subscribe(p => this.products = p);
   }
 
   loadEmployees() {

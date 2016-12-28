@@ -75,22 +75,24 @@
     <div *ngIf="!isSeller">
       <ion-item>
         <ion-label>OC负责人</ion-label>
-        <ion-select cancelText="取消" okText="确定" [(ngModel)]="srcTask.primaryOCId" (ngModelChange)="editingTask.primaryOCId=$event;editted=true;"
+        <ion-select multiple="false" cancelText="取消" okText="确定" [(ngModel)]="srcTask.primaryOCId" (ngModelChange)="editingTask.primaryOCId=$event;editted=true;"
           #OCIdSelect="ngModel" name="OCIdSelect" [required]="!isSeller">
           <ion-option *ngFor="let emp of OC" [value]="emp.empId">{{emp.name}}</ion-option>
         </ion-select>
       </ion-item>
       <ion-item>
         <ion-label>执行负责人</ion-label>
-        <ion-select cancelText="取消" okText="确定" [(ngModel)]="srcTask.primaryExecutorId" (ngModelChange)="editingTask.primaryExecutorId=$event;editted=true;"
+        <ion-select multiple="false" cancelText="取消" okText="确定" [(ngModel)]="srcTask.primaryExecutorId" (ngModelChange)="editingTask.primaryExecutorId=$event;editted=true;"
           #taskManagerIdSelect="ngModel" name="taskManagerIdSelect" [required]="!isSeller && !isOC">
           <ion-option *ngFor="let emp of taskManagers" [value]="emp.empId">{{emp.name}}</ion-option>
         </ion-select>
       </ion-item>
       <ion-item>
-        <ion-label floating>其他相关负责人员</ion-label>
-        <ion-input type="text" [(ngModel)]="srcTask.otherExecutors" (ngModelChange)="editingTask.otherExecutors=$event;editted=true;"
-          #otherExecutors="ngModel" name="otherExecutors"></ion-input>
+        <ion-label>其他执行人员</ion-label>
+        <ion-select multiple="true" cancelText="取消" okText="确定" [(ngModel)]="srcTask.otherExecutorIds" (ngModelChange)="editingTask.otherExecutorIds=$event;editted=true;"
+          #otherExecutorIdsSelect="ngModel" name="otherExecutorIdsSelect">
+          <ion-option *ngFor="let emp of taskManagers" [value]="emp.empId">{{emp.name}}</ion-option>
+        </ion-select>
       </ion-item>
     </div>
     <div *ngIf="!isSeller && !isOC">

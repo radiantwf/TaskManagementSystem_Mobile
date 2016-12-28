@@ -19,6 +19,7 @@ export class Task {
     public primaryExecutorId: string;
     public primaryExecutor: string;
     // 其他执行人
+    public otherExecutorIds: string[];
     public otherExecutors: string;
     // 任务要求执行周期
     public requiringEndDate: Date;

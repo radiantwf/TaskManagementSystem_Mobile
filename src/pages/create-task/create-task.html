@@ -65,8 +65,11 @@
           </ion-select>
         </ion-item>
         <ion-item>
-          <ion-label floating>其他相关负责人员</ion-label>
-          <ion-input type="text" [(ngModel)]="newTask.otherExecutors" #otherExecutors="ngModel" name="otherExecutors"></ion-input>
+          <ion-label>其他执行人员</ion-label>
+          <ion-select multiple="true" cancelText="取消" okText="确定" [(ngModel)]="newTask.otherExecutorIds" #otherExecutorIdsSelect="ngModel"
+            name="otherExecutorIdsSelect">
+            <ion-option *ngFor="let emp of taskManagers" [value]="emp.empId">{{emp.name}}</ion-option>
+          </ion-select>
         </ion-item>
       </div>
       <div *ngIf="!isSeller && !isOC">
@@ -82,12 +85,16 @@
         </ion-item>
       </div>
       <ion-item>
-        <ion-label floating>所属产品</ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-label>所属项目</ion-label>
+        <ion-select [(ngModel)]="newTask.parentProjectId" #parentProjectIdSelect="ngModel" name="parentProjectIdSelect">
+          <ion-option *ngFor="let project of projects" [value]="project.id">{{project.id}} - {{project.name}}</ion-option>
+        </ion-select>
       </ion-item>
       <ion-item>
-        <ion-label floating>所属项目</ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-label>所属产品</ion-label>
+        <ion-select [(ngModel)]="newTask.parentProductId" #parentProductIdSelect="ngModel" name="parentProductIdSelect">
+          <ion-option *ngFor="let product of products" [value]="product.id">{{product.id}} - {{product.name}}</ion-option>
+        </ion-select>
       </ion-item>
     </ion-list>
   </form>

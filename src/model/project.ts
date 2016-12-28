@@ -23,6 +23,7 @@ export class Project {
     public developmentManagerId: string;
     public developmentManager: string;
     // 其他执行人
+    public otherExecutorIds: string[];
     public otherExecutors: string;
     // 计划发布日期
     public planningReleaseDate: Date;
@@ -32,8 +33,9 @@ export class Project {
     public realAcceptanceDate: Date;
     // 状态
     public status: string;
-    // 关联产品
-    public relevantProduct: any;
+    // 所属产品
+    public parentProductId: string;
+    public parentProduct: string;
     constructor(
         // 项目编号
         public id: string,

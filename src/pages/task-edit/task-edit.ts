@@ -38,7 +38,7 @@ export class TaskEditPage {
   isTaskAdmin: boolean = false;
   isTaskManager: boolean = false;
   isAdmin: boolean = false;
-
+  onTaskEdited: any = null;
   today: Date = new Date(Date.parse(new Date(Date.now()).toLocaleDateString()));
 
   editingRequiringEndDate: string;
@@ -68,6 +68,9 @@ export class TaskEditPage {
     this.isTaskAdmin = user.permissions.findIndex(value => (value === 11 || value === 21)) >= 0;
     this.isTaskManager = user.permissions.findIndex(value => (value === 17 || value === 18 || value === 19 || value === 29)) >= 0;
 
+    this.onTaskEdited = () => {
+      this.reloadTask(null);
+    };
     this.events.taskEditedSubscribe(this.taskId, this.onTaskEdited);
   }
 
@@ -77,10 +80,6 @@ export class TaskEditPage {
 
   ionViewWillEnter() {
     this.loadEmployees();
-    this.reloadTask(null);
-  }
-
-  onTaskEdited() {
     this.reloadTask(null);
   }
 
