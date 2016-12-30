@@ -1,3 +1,10 @@
 page-product-detail {
-
+  .fab {
+    background-color: green;
+    opacity: 0.7;
+  }
+  .fab.activated {
+    background-color: green;
+    opacity: 1;
+  }
 }

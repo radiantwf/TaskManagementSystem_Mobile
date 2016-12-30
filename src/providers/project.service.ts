@@ -20,9 +20,12 @@ export class ProjectService {
     return this.http.get(url, { headers: this.httpHeaders() })
       .map(response => response.json().data as Project[]);
   }
-  getProjects(searchCriteria, pageNumber): Observable<Project[]> {
+  getProjects(searchCriteria, searchCriteria2, pageNumber): Observable<Project[]> {
     let url = `${this.projectsUrl}/?pagesize=${this.global.PageSize}&page=${pageNumber}`;
-    url += (searchCriteria == null ? '' : 'searchCriteria = ' + searchCriteria);
+    url += ((searchCriteria == null || searchCriteria === undefined || searchCriteria === '')
+      ? '' : '&searchCriteria=' + searchCriteria);
+    url += ((searchCriteria2 == null || searchCriteria2 === undefined || searchCriteria2 === '')
+      ? '' : '&searchCriteria2=' + searchCriteria2);
     return this.http.get(url, { headers: this.httpHeaders() })
       .map(response => response.json().data as Project[]);
   }

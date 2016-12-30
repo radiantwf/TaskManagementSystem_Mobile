@@ -13,15 +13,15 @@
         <ion-icon name="list" showWhen="android,windows,core" item-left></ion-icon>
         任务一览
       </button>
-      <button ion-item (click)="openPage(1)">
-        <ion-icon name="shirt-outline" showWhen="ios" item-left></ion-icon>
-        <ion-icon name="shirt" showWhen="android,windows,core" item-left></ion-icon>
-        产品一览
-      </button>
       <button ion-item (click)="openPage(2)">
         <ion-icon name="link-outline" showWhen="ios" item-left></ion-icon>
         <ion-icon name="link" showWhen="android,windows,core" item-left></ion-icon>
         项目一览
+      </button>
+      <button ion-item (click)="openPage(1)">
+        <ion-icon name="shirt-outline" showWhen="ios" item-left></ion-icon>
+        <ion-icon name="shirt" showWhen="android,windows,core" item-left></ion-icon>
+        产品一览
       </button>
       <button ion-item (click)="openPage(3)">
         <ion-icon name="at-outline" showWhen="ios" item-left></ion-icon>
@@ -48,7 +48,7 @@
 </ion-menu>
 <ion-tabs #mycontent #myTabs (ionChange)="onTabChanged($event)">
   <ion-tab [root]="tab1Root" tabTitle="任务" tabIcon="list"></ion-tab>
-  <ion-tab [root]="tab2Root" tabTitle="产品" tabIcon="shirt"></ion-tab>
   <ion-tab [root]="tab3Root" tabTitle="项目" tabIcon="link"></ion-tab>
+  <ion-tab [root]="tab2Root" tabTitle="产品" tabIcon="shirt"></ion-tab>
   <ion-tab [root]="tab4Root" tabTitle="@我" tabIcon="at"></ion-tab>
 </ion-tabs>

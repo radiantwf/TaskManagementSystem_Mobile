@@ -21,9 +21,12 @@ export class ProductService {
       .map(response => response.json().data as Product[]);
   }
 
-  getProducts(searchCriteria, pageNumber): Observable<Product[]> {
+  getProducts(searchCriteria, searchCriteria2, pageNumber): Observable<Product[]> {
     let url = `${this.productsUrl}/?pagesize=${this.global.PageSize}&page=${pageNumber}`;
-    url += (searchCriteria == null ? '' : 'searchCriteria = ' + searchCriteria);
+    url += ((searchCriteria == null || searchCriteria === undefined || searchCriteria === '')
+      ? '' : '&searchCriteria=' + searchCriteria);
+    url += ((searchCriteria2 == null || searchCriteria2 === undefined || searchCriteria2 === '')
+      ? '' : '&searchCriteria2=' + searchCriteria2);
     return this.http.get(url, { headers: this.httpHeaders() })
       .map(response => response.json().data as Product[]);
   }

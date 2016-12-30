@@ -14,5 +14,31 @@
     <ion-title>产品一览</ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding>
+<ion-content padding (touchend)="showDetail(touchProductId)">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新页面" refreshingSpinner="circles" refreshingText="刷新中......">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-searchbar [(ngModel)]="searchCriteria" (ionInput)="searchProduct($event)"></ion-searchbar>
+  <ion-card *ngFor="let product of products" (touchstart)="touchProductId=product.id" [ngClass]="{'card-activated': touchProductId === product.id}">
+    <ion-card-content [product-status]="product">
+      <ion-row>
+        <h2>{{product.name}}</h2>
+      </ion-row>
+      <ion-row>
+        <ion-col width-80>
+          <p *ngIf="product.status==='进行中' ">计划发布日期：{{product.planningReleaseDate | date:"yyyy年MM月dd日 "}}</p>
+          <p *ngIf="product.status==='已完成' || (product.status==='已关闭' && product.realEndDate!=null)">实际发布日期：{{product.realReleaseDate | date:"yyyy年MM月dd日 "}}</p>
+        </ion-col>
+        <ion-col width-20 right class="productstatus">
+          <p>{{product.status}}</p>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="circles" loadingText="获取更多数据......">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
+

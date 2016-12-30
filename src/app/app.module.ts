@@ -15,6 +15,8 @@ import { ProductDetailPage } from '../pages/product-detail/product-detail';
 import { CreateTaskPage } from '../pages/create-task/create-task';
 import { AtMePage } from '../pages/at-me/at-me';
 import { TaskStatusDirective } from '../components/task-status/task-status';
+import { ProjectStatusDirective } from '../components/project-status/project-status';
+import { ProductStatusDirective } from '../components/product-status/product-status';
 import { Global } from '../providers/global';
 import { Storage } from '@ionic/storage';
 import { UserService } from '../providers/user.service';
@@ -42,6 +44,8 @@ import { UserDefinedEventsService } from '../providers/user-defined-events.servi
     CommunicationsPage,
     AtMePage,
     TaskStatusDirective,
+    ProjectStatusDirective,
+    ProductStatusDirective,
   ],
   imports: [
     IonicModule.forRoot(MyApp)

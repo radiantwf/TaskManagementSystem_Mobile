@@ -5,14 +5,125 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>project-detail</ion-title>
+  <ion-navbar hideBackButton="true">
+    <ion-buttons left>
+      <button ion-button icon-only (click)="back()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title item-center>项目详细</ion-title>
   </ion-navbar>
-
 </ion-header>
-
-
 <ion-content padding>
-
+  <ion-fab right bottom>
+    <button ion-fab mini (click)="communicate()">
+        <ion-icon name="chatbubbles"></ion-icon>
+      </button>
+  </ion-fab>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新页面" refreshingSpinner="circles" refreshingText="刷新中......">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-item>
+    项目编号
+    <ion-note item-right>
+      {{project?.id}}
+    </ion-note>
+  </ion-item>
+  <ion-item text-wrap>
+    项目名称
+    <ion-note>
+      <br>{{project?.name}}
+    </ion-note>
+  </ion-item>
+  <ion-item text-wrap>
+    详细描述
+    <ion-note>
+      <br>{{project?.description}}
+    </ion-note>
+  </ion-item>
+  <ion-item>
+    创建人
+    <ion-note item-right>
+      {{project?.creator}}
+    </ion-note>
+  </ion-item>
+  <ion-item>
+    创建时间
+    <ion-note item-right>
+      {{project?.createdTime | date:"yyyy年MM月dd日 HH:mm:ss"}}
+    </ion-note>
+  </ion-item>
+  <ion-item>
+    销售负责人
+    <ion-note item-right>
+      {{project?.primarySeller}}
+    </ion-note>
+  </ion-item>
+  <ion-item>
+    客户联络方式
+    <ion-note item-right>
+      {{project?.customerContact}}
+    </ion-note>
+  </ion-item>
+  <ion-item *ngIf="project?.requiringAcceptanceDate!=null">
+    任务要求验收日期
+    <ion-note item-right>
+      {{project?.requiringAcceptanceDate | date:"yyyy年MM月dd日 HH:mm:ss"}}
+    </ion-note>
+  </ion-item>
+  <ion-item *ngIf="project?.parentProduct!=null">
+    所属产品
+    <ion-note item-right>
+      {{project?.parentProduct}}
+    </ion-note>
+  </ion-item>
+  <ion-item>
+    项目经理
+    <ion-note item-right>
+      {{project?.projectManager}}
+    </ion-note>
+  </ion-item>
+  <ion-item>
+    产品经理
+    <ion-note item-right>
+      {{project?.productManager}}
+    </ion-note>
+  </ion-item>
+  <ion-item>
+    研发经理
+    <ion-note item-right>
+      {{project?.developmentManager}}
+    </ion-note>
+  </ion-item>
+  <ion-item *ngIf="project?.otherExecutors!=null">
+    其他执行人
+    <ion-note item-right>
+      {{project?.otherExecutors}}
+    </ion-note>
+  </ion-item>
+  <ion-item *ngIf="project?.planningReleaseDate!=null">
+    计划发布日期
+    <ion-note item-right>
+      {{project?.planningReleaseDate | date:"yyyy年MM月dd日"}}
+    </ion-note>
+  </ion-item>
+  <ion-item *ngIf="project?.realReleaseDate!=null">
+    实际发布日期
+    <ion-note item-right>
+      {{project?.realReleaseDate | date:"yyyy年MM月dd日"}}
+    </ion-note>
+  </ion-item>
+  <ion-item>
+    状态
+    <ion-note item-right>
+      {{project?.status}}
+    </ion-note>
+  </ion-item>
+  <ion-item>
+    状态
+    <ion-note item-right>
+      {{project?.status}}
+    </ion-note>
+  </ion-item>
 </ion-content>
