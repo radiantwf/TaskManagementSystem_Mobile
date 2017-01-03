@@ -60,7 +60,7 @@
       </ion-item>
       <ion-item>
         <ion-label>要求完成日期</ion-label>
-        <ion-datetime displayFormat="YYYY年MM月DD日" [(ngModel)]="srcTask.requiringEndDate" (ngModelChange)="editingRequiringEndDate=$event;editted=true;"
+         <ion-datetime min="2016" max="2019" displayFormat="YYYY年MM月DD日" [(ngModel)]="srcTask.requiringEndDate" (ngModelChange)="editingRequiringEndDate=$event;editted=true;"
           #requiringEndDate="ngModel" name="requiringEndDate"></ion-datetime>
       </ion-item>
       <ion-item>
@@ -98,22 +98,22 @@
     <div *ngIf="!isSeller && !isOC">
       <ion-item>
         <ion-label>任务计划开始日期</ion-label>
-        <ion-datetime displayFormat="YYYY年MM月DD日" [(ngModel)]="srcTask.planningBeginDate" (ngModelChange)="editingPlanningBeginDate=$event;editted=true;"
+         <ion-datetime min="2016" max="2019" displayFormat="YYYY年MM月DD日" [(ngModel)]="srcTask.planningBeginDate" (ngModelChange)="editingPlanningBeginDate=$event;editted=true;"
           #planningBeginDate="ngModel" name="planningBeginDate" [required]="srcTask.planningBeginDate != null" [disabled]="srcTask.planningBeginDate == null"></ion-datetime>
       </ion-item>
       <ion-item>
         <ion-label>任务计划完成日期</ion-label>
-        <ion-datetime displayFormat="YYYY年MM月DD日" [(ngModel)]="srcTask.planningEndDate" (ngModelChange)="editingPlanningEndDate=$event;editted=true;"
+         <ion-datetime min="2016" max="2019" displayFormat="YYYY年MM月DD日" [(ngModel)]="srcTask.planningEndDate" (ngModelChange)="editingPlanningEndDate=$event;editted=true;"
           #planningEndDate="ngModel" name="planningEndDate" [required]="srcTask.planningEndDate != null" [disabled]="srcTask.planningEndDate == null"></ion-datetime>
       </ion-item>
       <ion-item>
         <ion-label>任务实际开始日期</ion-label>
-        <ion-datetime displayFormat="YYYY年MM月DD日" [(ngModel)]="srcTask.realBeginDate" (ngModelChange)="editingRealBeginDate=$event;editted=true;"
+         <ion-datetime min="2016" max="2019" displayFormat="YYYY年MM月DD日" [(ngModel)]="srcTask.realBeginDate" (ngModelChange)="editingRealBeginDate=$event;editted=true;"
           #realBeginDate="ngModel" name="realBeginDate" [required]="srcTask.realBeginDate != null" [disabled]="srcTask.realBeginDate == null"></ion-datetime>
       </ion-item>
       <ion-item>
         <ion-label>任务实际完成日期</ion-label>
-        <ion-datetime displayFormat="YYYY年MM月DD日" [(ngModel)]="srcTask.realEndDate" (ngModelChange)="editingRealEndDate=$event;editted=true;"
+         <ion-datetime min="2016" max="2019" displayFormat="YYYY年MM月DD日" [(ngModel)]="srcTask.realEndDate" (ngModelChange)="editingRealEndDate=$event;editted=true;"
           #realEndDate="ngModel" name="realEndDate" [required]="srcTask.realEndDate != null" [disabled]="srcTask.realEndDate == null"></ion-datetime>
       </ion-item>
       <ion-item>
