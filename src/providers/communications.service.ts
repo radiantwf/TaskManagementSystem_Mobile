@@ -22,7 +22,7 @@ export class CommunicationsService {
   getCommunicationsById(id: string): Observable<Communication[]> {
     const url = `${this.communicationsUrl}/${id}`;
     return this.http.get(url, { headers: this.httpHeaders() })
-      .map(response => response.json().data as Communication[])
+      .map(response => response.json().data as Communication[]);
   }
 
   create(communication: Communication): Observable<void> {

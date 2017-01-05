@@ -8,7 +8,7 @@ import { Task } from '../../model/task';
   for more info on Angular 2 Directives.
 */
 @Directive({
-  selector: '[task-status]' // Attribute selector
+  selector: '[task-status],[task-status-text]' // Attribute selector
 })
 export class TaskStatusDirective {
   constructor(private el: ElementRef, private renderer: Renderer) { }
@@ -35,6 +35,34 @@ export class TaskStatusDirective {
         statusStyle = 'finish';
       } else {
         statusStyle = 'overtime';
+      }
+    }
+
+    this.renderer.setElementClass(this.el.nativeElement, statusStyle, true);
+  }
+  @Input('task-status-text') set task2(taskRecord: Task) {
+    let statusStyle = 'error';
+    let today = new Date(Date.parse(new Date(Date.now()).toLocaleDateString()));
+
+    if (taskRecord.status === '新建' || taskRecord.status === '分配中'
+      || taskRecord.status === '计划中' || taskRecord.status === '未开始') {
+      statusStyle = 'notstart-text';
+    }
+    if (taskRecord.status === '进行中') {
+      if (new Date(taskRecord.planningEndDate) < today) {
+        statusStyle = 'ongoing-text';
+      } else {
+        statusStyle = 'overtime-text';
+      }
+    }
+
+    if (taskRecord.status === '已完成' || taskRecord.status === '已关闭') {
+      if (taskRecord.realBeginDate == null || taskRecord.realEndDate == null || taskRecord.planningEndDate == null) {
+        statusStyle = 'finish-text';
+      } else if (taskRecord.realEndDate <= taskRecord.planningEndDate) {
+        statusStyle = 'finish-text';
+      } else {
+        statusStyle = 'overtime-text';
       }
     }
 

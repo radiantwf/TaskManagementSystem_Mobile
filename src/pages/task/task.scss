@@ -33,11 +33,23 @@ page-task {
   .overtime {
     border-top: 3px solid #f69679;
   }
+  .notstart-text {
+    color: #cb93dd;
+  }
+  .finish-text {
+    color: #cccccc;
+  }
+  .ongoing-text {
+    color: #64decf;
+  }
+  .overtime-text {
+    color: #f69679;
+  }
   .card-content {
     padding: 15px 16px 10px 16px;
   }
   .card-activated {
-    background-color: #f1f1f1;
+    background-color: #fff;
     box-shadow: 4px 4px 12px 6px rgba(0, 0, 0, 0.24);
   }
   ion-col {

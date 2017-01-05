@@ -36,7 +36,7 @@
           <p *ngIf="task.status==='已完成' || (task.status==='已关闭' && task.realEndDate!=null)">实际完成日期：{{task.realEndDate | date:"yyyy年MM月dd日 "}}</p>
         </ion-col>
         <ion-col width-20 right class="taskstatus">
-          <p>{{task.status}}</p>
+          <p [task-status-text]="task">{{task.status}}</p>
         </ion-col>
       </ion-row>
     </ion-card-content>
