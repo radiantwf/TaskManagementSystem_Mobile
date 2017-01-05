@@ -181,7 +181,7 @@ export class TaskDetailPage {
     let buttons = new Array<any>();
     if (this.assignAble) {
       buttons.push({
-        text: '分配',
+        text: '接受',
         icon: !this.platform.is('ios') ? 'none' : null,
         handler: () => {
           let confirmModal = this.modalCtrl.create(TaskAssignModal, { task: this.task });
@@ -201,7 +201,7 @@ export class TaskDetailPage {
     }
     if (this.planAble) {
       buttons.push({
-        text: '计划',
+        text: '接受',
         icon: !this.platform.is('ios') ? 'none' : null,
         handler: () => {
           let confirmAlert = this.alertCtrl.create({
@@ -228,7 +228,7 @@ export class TaskDetailPage {
                 handler: (data) => {
                   let newTask = new Task(this.taskId, null);
                   newTask.planningBeginDate = new Date(Date.parse(data.dateBegin));
-                  newTask.planningBeginDate = new Date(Date.parse(data.dateEnd));
+                  newTask.planningEndDate = new Date(Date.parse(data.dateEnd));
                   this.taskService.strat(newTask)
                     .subscribe(() => {
                       this.reloadTask(null);
