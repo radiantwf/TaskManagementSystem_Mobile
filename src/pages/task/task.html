@@ -19,13 +19,13 @@
     </ion-buttons>
   </ion-navbar>
 </ion-header>
-<ion-content padding (touchend)="showDetail(touchTaskId)">
+<ion-content padding (touchend)="touchTaskId=null">
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新页面" refreshingSpinner="circles" refreshingText="刷新中......">
     </ion-refresher-content>
   </ion-refresher>
   <ion-searchbar [(ngModel)]="searchCriteria" (ionInput)="searchTask($event)"></ion-searchbar>
-  <ion-card *ngFor="let task of tasks" (touchstart)="touchTaskId=task.id" [ngClass]="{'card-activated': touchTaskId === task.id}">
+  <ion-card *ngFor="let task of tasks" (touchstart)="touchTaskId=task.id" (click)="showDetail(task.id)" [ngClass]="{'card-activated': touchTaskId === task.id}">
     <ion-card-content [task-status]="task">
       <ion-row>
         <h2>{{task.name}}</h2>
