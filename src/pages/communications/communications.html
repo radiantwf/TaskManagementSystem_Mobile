@@ -16,7 +16,7 @@
 </ion-header>
 <ion-content padding>
   <div class="dynamic">
-    <template ngFor let-record [ngForOf]="list">
+    <ng-template ngFor let-record [ngForOf]="list">
       <div [ngClass]="{'other': record?.personId !== empId, 'me': record?.personId === empId}">
         <ul>
           <li *ngIf="record.personId !== empId" class="title">
@@ -32,7 +32,7 @@
           </li>
         </ul>
       </div>
-    </template>
+    </ng-template>
   </div>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content loadingSpinner="circles" loadingText="获取最新信息">
