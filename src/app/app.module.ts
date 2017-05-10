@@ -21,7 +21,7 @@ import { TaskStatusDirective } from '../components/task-status/task-status';
 import { ProjectStatusDirective } from '../components/project-status/project-status';
 import { ProductStatusDirective } from '../components/product-status/product-status';
 import { Global } from '../providers/global';
-import { Storage } from '@ionic/storage';
+import { IonicStorageModule } from '@ionic/storage';
 import { UserService } from '../providers/user.service';
 import { EmployeeService } from '../providers/employee.service';
 import { TaskService } from '../providers/task.service';
@@ -56,7 +56,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -77,7 +78,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   ],
   providers: [
     Global,
-    Storage,
     UserService,
     EmployeeService,
     TaskService,
