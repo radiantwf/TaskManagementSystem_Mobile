@@ -1,6 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { Platform, AlertController, App, NavController } from 'ionic-angular';
-import { StatusBar, Splashscreen } from 'ionic-native';
+
+import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen } from '@ionic-native/splash-screen';
 import { SigninPage } from '../pages/signin/signin';
 
 @Component({
@@ -10,14 +12,15 @@ export class MyApp {
   rootPage = SigninPage;
   exitAlertPopFlag = false;
   @ViewChild('rootNav') nav: NavController;
-  constructor(public platform: Platform,
+  constructor(public platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
     public app: App,
     public alertCtrl: AlertController) {
+
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      StatusBar.styleDefault();
-      Splashscreen.hide();
+      statusBar.styleDefault();
+      splashScreen.hide();
       this.registerBackButtonListener();
     });
   }
