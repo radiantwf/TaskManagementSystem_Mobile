@@ -1,6 +1,9 @@
 import { NgModule, ErrorHandler } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+
+
 import { TabsPage } from '../pages/tabs/tabs';
 import { SigninPage } from '../pages/signin/signin';
 import { CommunicationsPage } from '../pages/communications/communications';
@@ -27,6 +30,10 @@ import { ProductService } from '../providers/product.service';
 import { CommunicationsService } from '../providers/communications.service';
 import { UserDefinedEventsService } from '../providers/user-defined-events.service';
 
+
+import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen } from '@ionic-native/splash-screen';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -48,6 +55,7 @@ import { UserDefinedEventsService } from '../providers/user-defined-events.servi
     ProductStatusDirective,
   ],
   imports: [
+    BrowserModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -80,6 +88,10 @@ import { UserDefinedEventsService } from '../providers/user-defined-events.servi
     {
       provide: ErrorHandler,
       useClass: IonicErrorHandler
-    }]
+    },
+    StatusBar,
+    SplashScreen,
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
+  ]
 })
-export class AppModule { }
+export class AppModule {}
